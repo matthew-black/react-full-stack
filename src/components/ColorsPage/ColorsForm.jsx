@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-function ColorForm({colors, fetchColors}) {
+
+function ColorsForm({colors, fetchColors}) {
   const [colorInput, setColorInput] = useState('')
 
   const createColor = (event) => {
@@ -40,4 +41,5 @@ function ColorForm({colors, fetchColors}) {
   )
 }
 
-export default ColorForm
+
+export default ColorsForm

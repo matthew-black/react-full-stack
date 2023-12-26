@@ -34,13 +34,31 @@ router.post('/', (req, res) => {
   const sqlValues = [req.body.color]
 
   pool.query(sqlText, sqlValues)
-  .then((dbRes) => {
-    res.sendStatus(201)
-  })
-  .catch((dbErr) => {
-    console.log('POST /api/colors fail:', dbErr)
-    res.sendStatus(500)
-  })
+    .then((dbRes) => {
+      res.sendStatus(201)
+    })
+    .catch((dbErr) => {
+      console.log('POST /api/colors fail:', dbErr)
+      res.sendStatus(500)
+    })
+})
+
+router.delete('/:id', (req, res) => {
+  console.log(`DELETE ${routerPath}/:id received a request.`)
+  const sqlText = `
+    DELETE FROM "colors"
+      WHERE "id"=$1;
+  `
+  const sqlValues = [req.params.id]
+
+  pool.query(sqlText, sqlValues)
+    .then((dbRes) => {
+      res.sendStatus(200)
+    })
+    .catch((dbErr) => {
+      console.log('DE:ETE /api/colors/:id fail:', dbErr)
+      res.sendStatus(500)
+    })
 })
 
 module.exports = router

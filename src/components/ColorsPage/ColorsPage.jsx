@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Header from './Header.jsx'
-import ColorForm from './ColorForm.jsx'
-import ColorList from './ColorList.jsx'
+import ColorsForm from './ColorsForm'
+import ColorsList from './ColorsList'
 
-function App() {
+
+function ColorsPage() {
   const [colors, setColors] = useState([])
 
   useEffect(() => {
@@ -25,12 +25,12 @@ function App() {
   }
 
   return (
-    <div>
-      <Header />
-      <ColorForm colors={colors} fetchColors={fetchColors} />
-      <ColorList colors={colors}/>
-    </div>
+    <>
+      <ColorsForm colors={colors} fetchColors={fetchColors} />
+      <ColorsList colors={colors} fetchColors={fetchColors}/>
+    </>
   )
 }
 
-export default App
+
+export default ColorsPage
