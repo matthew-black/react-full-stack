@@ -1,34 +1,75 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import viteLogo from '/vite.svg'
-import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [colors, setColors] = useState([])
+  const [colorInput, setColorInput] = useState('')
+
+  useEffect(() => {
+    fetchColors()
+  }, [])
+
+  const fetchColors = () => {
+    axios({
+      method: 'GET',
+      url: '/api/colors'
+    })
+      .then((response) => {
+        setColors(response.data)
+      })
+      .catch((error) => {
+        console.log('fetchColors fail:', error)
+      })
+  }
+
+  const createColor = (event) => {
+    event.preventDefault()
+
+    if (!colors.includes(colorInput)) {
+      axios({
+        method: 'POST',
+        url:'/api/colors',
+        data: {
+          color: colorInput
+        }
+      })
+        .then((response) => {
+          setColorInput('')
+          fetchColors()
+        })
+        .catch((error) => {
+          console.log('createColor fail:', error)
+        })
+    } else {
+      alert('You are not allowed to create the same color twice.')
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1>
+        <img src={viteLogo} alt="Vite logo" />
+        Hello.
+        <img src={viteLogo} alt="Vite logo" />
+      </h1>
+      
+      <form>
+        <input 
+          type="text"
+          placeholder="Add a color"
+          value={colorInput}
+          onChange={(e) => {setColorInput(e.target.value.toLowerCase())}}
+        />
+        <button onClick={createColor}>Submit</button>
+      </form>
+
+      <ul>
+        {
+          colors.map(color => <li key={color}>{color}</li>)
+        }
+      </ul>
+    </div>
   )
 }
 
