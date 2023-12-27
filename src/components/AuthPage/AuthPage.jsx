@@ -1,3 +1,5 @@
+// TODO split this into components and implement useContext
+// so a user object is globally available:
 import { useState } from 'react'
 import axios from 'axios'
 

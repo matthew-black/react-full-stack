@@ -1,10 +1,10 @@
 const express = require('express')
 
-// 🍪🍪 Refactor this into a sessionHelpers module: 🍪🍪
+// 🍪🍪 Refactor this into a sessionHelpers module: 🍪🍪 TODO
 const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
 
-// 🚀🚀 Refactor this into a single api.cjs import: 🚀🚀
+// 🚀🚀 Refactor this into a single api.cjs import: 🚀🚀 TODO
 const usersRouter = require('./routes/users.router.cjs')
 const colorsRouter = require('./routes/colors.router.cjs')
 
@@ -14,7 +14,7 @@ const port = 5001
 app.use(express.json())
 app.use(express.static('dist'))
 
-// 🍪🍪 Refactor this into a module: 🍪🍪
+// 🍪🍪 Refactor this into a module: 🍪🍪 TODO
 app.use(session({
   cookie: { 
     maxAge: 6 * 60 * 60 * 1000, // 6h
@@ -30,7 +30,7 @@ app.use(session({
   secret: 'this is where something secret would go...'
 }))
 
-// 🚀🚀 Refactor into a single app.use('/api', api): 🚀🚀
+// 🚀🚀 Refactor into a single app.use('/api', api): 🚀🚀 TODO
 app.use('/api/colors', colorsRouter)
 app.use('/api/users', usersRouter)
 

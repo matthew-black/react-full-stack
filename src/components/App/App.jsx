@@ -5,7 +5,7 @@ import AboutPage from '../AboutPage/AboutPage.jsx'
 import AuthPage from '../AuthPage/AuthPage.jsx'
 import ColorsPage from '../ColorsPage/ColorsPage.jsx'
 
-
+// TODO auth-based routing stuff:
 function App() {
   return (
     <div>

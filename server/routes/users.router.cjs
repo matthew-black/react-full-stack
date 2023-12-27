@@ -5,7 +5,7 @@ const pool = require('../modules/pool.cjs')
 const router = express.Router()
 
 // Be sure to think through route naming conventions
-// once all of this is up and running!
+// once all of this is up and running! TODO
 
 // Need a route that can tell the client if the current
 // user has an active session.
@@ -67,7 +67,7 @@ router.post('/sessions', async (req, res) => {
         // guard against forms of session fixation
         req.session.regenerate((regenErr) => {
           if (regenErr) {
-            next(regenErr)
+            next(regenErr) // TODO get rid of these next calls and send back 500 instead.
           }
 
           // Create the session.user object:
