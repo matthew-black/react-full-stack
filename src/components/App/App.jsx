@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Nav from './Nav.jsx'
 
 import AboutPage from '../AboutPage/AboutPage.jsx'
@@ -9,7 +9,7 @@ import ColorsPage from '../ColorsPage/ColorsPage.jsx'
 function App() {
   return (
     <div>
-      <HashRouter>
+      <BrowserRouter>
         <Nav />
         <Routes>
           <Route path='/' element={<Navigate to="/colors" replace />} />
@@ -18,7 +18,7 @@ function App() {
           <Route path="about" element={<AboutPage />} />
           <Route path="*" element={<h1>Hmm. That's not a thing.</h1>} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   )
 }

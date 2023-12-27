@@ -1,7 +1,13 @@
 body {
-  background-color: aquamarine;
+  background-color: rgb(225, 225, 225);
+  color: rgb(50, 50, 50);
 }
 
-.active {
-  color: red
+nav a {
+  color: rgb(125, 125, 125);
+  text-decoration: none;
+}
+
+nav a.active {
+  color: rgb(50, 50, 50);
 }
