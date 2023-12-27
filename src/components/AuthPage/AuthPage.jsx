@@ -19,7 +19,7 @@ function AuthPage() {
       }
     })
       .then((response) => {
-        console.log('✅')
+        console.log('successful registeration!')
       })
       .catch((error) => {
         console.log('registerUser fail:', error)
@@ -38,11 +38,36 @@ function AuthPage() {
       }
     })
       .then((response) => {
-        console.log('🍪')
-        console.log(response.data)
+        console.log('successful login!')
       })
       .catch((error) => {
         console.log('loginUser fail:', error)
+      })
+  }
+
+  const logoutUser = () => {
+    axios({
+      method: 'DELETE',
+      url: '/api/users/sessions'
+    })
+      .then((response) => {
+        console.log('successful logout!')
+      })
+      .catch((error) => {
+        console.log('logoutUser fail:', error)
+      })
+  }
+
+  const getSession = () => {
+    axios({
+      method: 'GET',
+      url: '/api/users/sessions'
+    })
+      .then((response) => {
+        console.log('session is:', response.data)
+      })
+      .catch((error) => {
+        console.log('getSession fail:', error)
       })
   }
 
@@ -65,7 +90,7 @@ function AuthPage() {
         />
         <button>Register</button>
       </form>
-
+      <br/>
       <form onSubmit={loginUser}>
         <input
           type="text"
@@ -81,6 +106,11 @@ function AuthPage() {
         />
         <button>Log In</button>
       </form>
+      <br/>
+      <button onClick={logoutUser}>Log Out</button>
+      <br/>
+      <button onClick={getSession}>Get Session</button>
+
 
     </div>
   )
@@ -99,7 +129,7 @@ export default AuthPage
 // 1. C: Login form submits username/password to server.
 // 2. S: Verify username exists. Hash submitted password and verify
 //       that it matches the stored password hash.
-// 3. S: Yay. cookie-parser time! Bake a session cookie:
+// 3. S: Yay. cookie-parser (or?) time! Bake a session cookie:
               // response.cookie('nameOfCookie', 'cookieValue', {
               //   maxAge: 60 * 60 * 1000, // 1 hour
               //   httpOnly: true,

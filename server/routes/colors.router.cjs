@@ -5,6 +5,7 @@ const pool = require('../modules/pool.cjs')
 const routerPath = '/api/colors'
 
 router.get('/', (req, res) => {
+  console.log('req.session.user is:', req.session.user)
   console.log(`GET ${routerPath} received a request.`)
   const sqlText = `
     SELECT * FROM "colors"

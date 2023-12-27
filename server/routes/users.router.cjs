@@ -7,15 +7,19 @@ const router = express.Router()
 // Be sure to think through route naming conventions
 // once all of this is up and running!
 
-// Need a route that will respond with user data about
-// the currently logged-in user.
+// Need a route that can tell the client if the current
+// user has an active session.
+// GET /api/users/sessions
+  // Responds with the current session.user object || {}
+router.get('/sessions', (req, res) => {
+  res.send(req.session.user || {})
+})
 
-// Need a route that'll delete the requesting user's
-// session. (Log out.)
+
 
 // POST /api/users
-// Creates a new user. AKA: Registration.
-router.post('/', (req, res, next) => {
+  // Creates a new user. AKA: Registration.
+router.post('/', (req, res) => {
   console.log('POST /api/users received a request.')
   console.log('\tHere is req.body:', req.body)
 
@@ -26,14 +30,12 @@ router.post('/', (req, res, next) => {
     INSERT INTO "users"
       ("username", "password")
       VALUES
-      ($1, $2)
-      RETURNING "id";
+      ($1, $2);
   `
   const sqlValues = [username, passwordHash]
   
   pool.query(sqlText, sqlValues)
     .then((dbRes) => {
-      console.log('dbRes.rows[0]:', dbRes.rows[0])
       res.sendStatus(201)
     })
     .catch((dbErr) => {
@@ -43,12 +45,7 @@ router.post('/', (req, res, next) => {
 })
 
 // POST /api/users/sessions
-// Creates a new session. AKA: Login.
-// This route needs to:
-  // 1. Verify that the sent username exists.
-  // 2. Verify that the sent password is correct.
-  // 3. Create a session and corresponding cookie.
-  // 4. Respond with 201 and the cookie.
+  // Creates a new session. AKA: Login.
 router.post('/sessions', async (req, res) => {
   console.log('POST /api/users/sessions received a request.')
   console.log('\tHere is req.body:', req.body)
@@ -61,23 +58,67 @@ router.post('/sessions', async (req, res) => {
   const sqlValues = [username]
 
   try {
-    const { rows } = await pool.query(sqlText, sqlValues)
-    const user = rows[0]
+    const dbRes = await pool.query(sqlText, sqlValues)
+    const user = dbRes.rows[0]
+    
     if (user) {
       if (verify(password, user.password)) {
-        res.send({
-          woo_you_get_a: '🍪'
+        // regenerate the session, which is good practice to help
+        // guard against forms of session fixation
+        req.session.regenerate((regenErr) => {
+          if (regenErr) {
+            next(regenErr)
+          }
+
+          // Create the session.user object:
+          req.session.user = {
+            id: user.id,
+            username: user.username,
+          }
+
+          // Save the session:
+          req.session.save((saveErr) => {
+            if (saveErr) {
+              return next(saveErr)
+            }
+            // Tell client that the session has been created:
+            res.sendStatus(201)
+          })
         })
       } else {
+        // Invalid credentials!
         res.sendStatus(401)
       }
     } else {
+      // Invalid credentials!
       res.sendStatus(401)
     }
   } catch (dbErr) {
     console.log('POST /api/users/sessions fail:', dbErr)
     res.sendStatus(500)
   }
+})
+
+// DELETE /api/users/sessions
+  // Deletes the current session. AKA: Logout.
+router.delete('/sessions', (req, res) => {
+  req.session.user = null
+
+  req.session.save((saveErr) => {
+    if (saveErr) {
+      console.log('session save error:', saveErr)
+      res.sendStatus(500)
+    }
+
+    req.session.regenerate((regenErr) => {
+      if (regenErr) {
+        console.log('session regen error:', regenErr)
+        res.sendStatus(500)
+      }
+      // Tell client session was successfully deleted:
+      res.sendStatus(200)
+    })
+  })
 })
 
 
