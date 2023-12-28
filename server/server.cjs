@@ -1,5 +1,5 @@
 const express = require('express')
-const sessionMiddleware = require('./modules/session.cjs')
+const sessionMiddleware = require('./modules/sessionMiddleware.cjs')
 const apiRouter = require('./routes/_api.router.cjs')
 
 const app = express()
