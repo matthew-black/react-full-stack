@@ -1,18 +1,21 @@
 const express = require('express')
 const router = express.Router()
 const pool = require('../modules/pool.cjs')
+const { rejectUnauthenticated } = require('../modules/authMiddleware.cjs')
 
 const routerPath = '/api/colors'
 
-router.get('/', (req, res) => {
-  console.log('req.session.user is:', req.session.user)
+
+router.get('/', rejectUnauthenticated, (req, res) => {
   console.log(`GET ${routerPath} received a request.`)
   const sqlText = `
     SELECT * FROM "colors"
+      WHERE "user_id"=$1
       ORDER BY "inserted_at";
   `
+  const sqlValues = [req.session.user.id]
 
-  pool.query(sqlText)
+  pool.query(sqlText, sqlValues)
     .then((dbRes) => {
       console.log(dbRes.rows)
       res.send(dbRes.rows)
@@ -23,16 +26,16 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log(`POST ${routerPath} received a request.`)
   console.log('\tHere is req.body:', req.body)
   const sqlText = `
     INSERT INTO "colors"
-      ("name")
+      ("name", "user_id")
       VALUES
-      ($1);
+      ($1, $2);
   `
-  const sqlValues = [req.body.color]
+  const sqlValues = [req.body.color, req.session.user.id]
 
   pool.query(sqlText, sqlValues)
     .then((dbRes) => {
@@ -44,22 +47,23 @@ router.post('/', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   console.log(`DELETE ${routerPath}/:id received a request.`)
   const sqlText = `
     DELETE FROM "colors"
-      WHERE "id"=$1;
+      WHERE "id"=$1 AND "user_id"=$2;
   `
-  const sqlValues = [req.params.id]
+  const sqlValues = [req.params.id, req.session.user.id]
 
   pool.query(sqlText, sqlValues)
     .then((dbRes) => {
       res.sendStatus(200)
     })
     .catch((dbErr) => {
-      console.log('DE:ETE /api/colors/:id fail:', dbErr)
+      console.log('DELETE /api/colors/:id fail:', dbErr)
       res.sendStatus(500)
     })
 })
+
 
 module.exports = router

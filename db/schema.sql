@@ -1,35 +1,26 @@
-DROP TRIGGER IF EXISTS "on_users_update" ON "users";
-DROP TABLE IF EXISTS "users";
 DROP TRIGGER IF EXISTS "on_colors_update" ON "colors";
 DROP TABLE IF EXISTS "colors";
+DROP TRIGGER IF EXISTS "on_users_update" ON "users";
+DROP TABLE IF EXISTS "users";
 
+-- GENERATED ALWAYS AS IDENTITY replaces SERIAL
+  -- https://wiki.postgresql.org/wiki/Don%27t_Do_This#Don.27t_use_serial:~:text=the%20right%20thing.-,Don%27t%20use%20serial,-For%20new%20applications
 CREATE TABLE "users" (
-  "id" SERIAL PRIMARY KEY,
+  "id" INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   "username" VARCHAR(80) UNIQUE NOT NULL,
   "password" VARCHAR(1000) NOT NULL,
   "inserted_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-INSERT INTO "users"
-  ("username", "password")
-  VALUES
-  ('test', 'test');
-
 CREATE TABLE "colors" (
-  "id" SERIAL PRIMARY KEY,
-  "name" VARCHAR(80) UNIQUE NOT NULL,
-  "user_id" INTEGER REFERENCES "users" NOT NULL ON DELETE CASCADE,
+  "id" INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  "name" VARCHAR(80) NOT NULL,
+  "user_id" INTEGER NOT NULL REFERENCES "users"("id") ON DELETE CASCADE,
+  UNIQUE ("name", "user_id"),
   "inserted_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
   "updated_at" TIMESTAMPTZ NOT NULL DEFAULT now()
 );
-
-INSERT INTO "colors"
-  ("name")
-  VALUES
-  ('red', 1),
-  ('yellow', 1),
-  ('blue', 1);
   
 CREATE OR REPLACE FUNCTION set_updated_at_to_now()
 RETURNS TRIGGER AS $$
