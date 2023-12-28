@@ -4,21 +4,8 @@ const pool = require('../modules/pool.cjs')
 
 const router = express.Router()
 
-// Be sure to think through route naming conventions
-// once all of this is up and running! TODO
 
-// Need a route that can tell the client if the current
-// user has an active session.
-// GET /api/users/sessions
-  // Responds with the current session.user object || {}
-router.get('/sessions', (req, res) => {
-  res.send(req.session.user || {})
-})
-
-
-
-// POST /api/users
-  // Creates a new user. AKA: Registration.
+// POST /api/users (Creates a user. AKA: Registration.)
 router.post('/', (req, res) => {
   console.log('POST /api/users received a request.')
   console.log('\tHere is req.body:', req.body)
@@ -44,8 +31,12 @@ router.post('/', (req, res) => {
     })
 })
 
-// POST /api/users/sessions
-  // Creates a new session. AKA: Login.
+// GET /api/users/sessions (Responds with current session.user object or {})
+router.get('/sessions', (req, res) => {
+  res.send(req.session.user || {})
+})
+
+// POST /api/users/sessions (Creates a new session. AKA: Login.)
 router.post('/sessions', async (req, res) => {
   console.log('POST /api/users/sessions received a request.')
   console.log('\tHere is req.body:', req.body)
@@ -67,7 +58,8 @@ router.post('/sessions', async (req, res) => {
         // guard against forms of session fixation
         req.session.regenerate((regenErr) => {
           if (regenErr) {
-            next(regenErr) // TODO get rid of these next calls and send back 500 instead.
+            console.log('regenErr in POST /api/users/sessions:', regenErr)
+            res.sendStatus(500)
           }
 
           // Create the session.user object:
@@ -79,7 +71,8 @@ router.post('/sessions', async (req, res) => {
           // Save the session:
           req.session.save((saveErr) => {
             if (saveErr) {
-              return next(saveErr)
+              console.log('saveErr in POST /api/users/sessions:', saveErr)
+              res.sendStatus(500)
             }
             // Tell client that the session has been created:
             res.sendStatus(201)
@@ -99,8 +92,7 @@ router.post('/sessions', async (req, res) => {
   }
 })
 
-// DELETE /api/users/sessions
-  // Deletes the current session. AKA: Logout.
+// DELETE /api/users/sessions (Deletes the current session. AKA: Logout.)
 router.delete('/sessions', (req, res) => {
   req.session.user = null
 
