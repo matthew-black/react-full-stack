@@ -1,26 +1,20 @@
-// TODO split this into components and implement useContext
-// so a user object is globally available:
 import { useState } from 'react'
-import axios from 'axios'
+
+import useAuth from '../../useAuth.jsx'
 
 function AuthPage() {
+  const { register, logIn, logOut } = useAuth()
+
   const [registerUsername, setRegisterUsername] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
   const [loginUsername, setLoginUsername] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
 
-  const registerUser = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault()
 
-    axios({
-      method: 'POST',
-      url: '/api/users',
-      data: {
-        username: registerUsername,
-        password: registerPassword
-      }
-    })
-      .then((response) => {
+    register(registerUsername, registerPassword)
+      .then(() => {
         console.log('successful registeration!')
       })
       .catch((error) => {
@@ -28,18 +22,11 @@ function AuthPage() {
       })
   }
 
-  const loginUser = (e) => {
+  const handleLogIn = (e) => {
     e.preventDefault()
 
-    axios({
-      method: 'POST',
-      url: '/api/users/sessions',
-      data: {
-        username: loginUsername,
-        password: loginPassword
-      }
-    })
-      .then((response) => {
+    logIn(loginUsername, loginPassword)
+      .then(() => {
         console.log('successful login!')
       })
       .catch((error) => {
@@ -47,12 +34,9 @@ function AuthPage() {
       })
   }
 
-  const logoutUser = () => {
-    axios({
-      method: 'DELETE',
-      url: '/api/users/sessions'
-    })
-      .then((response) => {
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
         console.log('successful logout!')
       })
       .catch((error) => {
@@ -60,24 +44,11 @@ function AuthPage() {
       })
   }
 
-  const getSession = () => {
-    axios({
-      method: 'GET',
-      url: '/api/users/sessions'
-    })
-      .then((response) => {
-        console.log('session is:', response.data)
-      })
-      .catch((error) => {
-        console.log('getSession fail:', error)
-      })
-  }
-
   return (
     <div>
       <h1>Auth Page!</h1>
       
-      <form onSubmit={registerUser}>
+      <form onSubmit={handleRegister}>
         <input
           type="text"
           placeholder="username"
@@ -93,7 +64,7 @@ function AuthPage() {
         <button>Register</button>
       </form>
       <br/>
-      <form onSubmit={loginUser}>
+      <form onSubmit={handleLogIn}>
         <input
           type="text"
           placeholder="username"
@@ -109,38 +80,10 @@ function AuthPage() {
         <button>Log In</button>
       </form>
       <br/>
-      <button onClick={logoutUser}>Log Out</button>
-      <br/>
-      <button onClick={getSession}>Get Session</button>
-
-
+      <button onClick={handleLogOut}>Log Out</button>
     </div>
   )
 }
 
 
 export default AuthPage
-
-// REGISTRATION:
-// 1. C: Registration form submit username/password to server.
-// 2. S: Verify username doesn't exist. Hash password. Store username
-//       and hashed password. Respond with 201.
-// 3. C: Routes to login page.
-
-// LOGIN:
-// 1. C: Login form submits username/password to server.
-// 2. S: Verify username exists. Hash submitted password and verify
-//       that it matches the stored password hash.
-// 3. S: Yay. cookie-parser (or?) time! Bake a session cookie:
-              // response.cookie('nameOfCookie', 'cookieValue', {
-              //   maxAge: 60 * 60 * 1000, // 1 hour
-              //   httpOnly: true,
-              //   secure: true,
-              //   sameSite: true,
-              // })
-// 4. S: Respond with 201 (session created) and the cookie.
-// 5. C: useContext and a custom hook that makes a global user obj.
-
-// AUTHENTICATED USER REQ/RES:
-// 1. C: Requests a resource that requires auth. (Cookie comes along!)
-// 2. S: Express route runs some kind of "verifyAuthenticatedUser" middleware.

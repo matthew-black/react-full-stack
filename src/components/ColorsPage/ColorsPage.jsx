@@ -9,6 +9,10 @@ function ColorsPage() {
 
   useEffect(() => {
     fetchColors()
+
+    return () => {
+      setColors([])
+    }
   }, [])
 
   const fetchColors = () => {

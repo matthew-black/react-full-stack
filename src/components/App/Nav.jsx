@@ -1,14 +1,19 @@
 import { NavLink } from "react-router-dom";
+import useAuth from '../../useAuth.jsx'
 
 
 function Nav() {
+  const { user, logOut } = useAuth()
+
   return (
   <nav>
     <ul>
       <li>
-        <NavLink to="/colors">
-          colors
-        </NavLink>
+        {user.id ? 
+          <NavLink to="/colors">colors</NavLink>
+          :
+          <NavLink to="/auth">login/register</NavLink>
+        }
       </li>
       <li>
         <NavLink
@@ -24,11 +29,7 @@ function Nav() {
           about
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/auth">
-          login/register
-        </NavLink>
-      </li>
+      {user.id && <li onClick={logOut}>log out</li>}
     </ul>
   </nav>
   )
