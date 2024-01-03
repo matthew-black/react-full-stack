@@ -1,8 +1,11 @@
-# React + Vite
+# React Full-Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Usage
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Create a `colors` database.
+2. Run the queries from `/db/schema.sql`.
+3. Run the queries from `/db/seed.sql`.
+4. `npm install`.
+5. `npm run server`.
+6. `npm run client`.
+7. Enjoy using this very advanced application.
