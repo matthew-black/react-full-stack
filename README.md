@@ -1,5 +1,7 @@
 # React Full-Stack
 
+Just an exploration of building a React/Express app using newer tools/libraries/APIs.
+
 ## Usage
 
 1. Create a `colors` database.
