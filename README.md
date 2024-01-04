@@ -36,7 +36,7 @@ My ongoing/condensed notes on how this approach differs from our current stack/c
 * There's a cool new paradigm that uses an `<Outlet/>` wrapper component. It sounds like this is how *Remix* works, and v6 slurped up a good idea that provides a good dev experience.
   * Docs for the `<Outlet />` component:
     * https://reactrouter.com/en/main/components/outlet
-  * Check out line 38 here. Everything inside the `'<Layout />` component is nested in both:
+  * Check out line 38 [here](https://github.com/remix-run/react-router/blob/dev/examples/auth/src/App.tsx). Everything inside the `'<Layout />` component is nested in both:
     * The React Router path.
     * The React component tree.
     * Kinda neat, but a different approach for sure.
