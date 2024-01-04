@@ -1,6 +1,12 @@
-# React Full-Stack w/ Shiny New Things
+# React Full-Stack w/ Less Abstraction
 
 This is an exploration of building a React/Express app using newer tools/libraries/APIs. Eventually it'll be a multi-user blog with posts, comments, and likes. Maybe there will be some flexbox, because flexbox is all I really know. 🙂
+
+Things that are different from the post-Hooks Prime stack:
+* `vite` instead of `CRA`.
+* `react-router` v6 instead of v5.
+* `express-session` instead of `passport`.
+* `Context` instead of `Redux/Redux-Saga`.
 
 ## Usage
 
@@ -16,12 +22,12 @@ This is an exploration of building a React/Express app using newer tools/librari
 
 My ongoing/condensed notes on how this approach differs from our current stack/curriculum.
 
-#### Vite is Gravy.
+#### Vite is gravy.
 
 * The end. It's just awesome. ⚡️
 * Weird thing though, any files that aren't using ESM import/export syntax need to use the `.cjs` file extension. (I really dig the explictness of that.)
 
-#### React-Router v6 is Slightly Different and Exposes Really Cool New Opt-In Features:
+#### React-router v6 is slightly different and exposes really cool new opt-in features:
 
 * `<NavLink>` is cool.
   * It has extra special powers if following a certain data querying paradigm:
@@ -37,7 +43,7 @@ My ongoing/condensed notes on how this approach differs from our current stack/c
 * I haven't gotten all the way through this, but it's worth reading for some context on what React Router is exploring:
   * https://remix.run/blog/remixing-react-router
 
-#### Server-Side, Auth is Much Less Abstract w/o Passport.
+#### Server-side, auth is much less abstract w/o passport.
 
 * I chose to use cookies/sessions rather than JWT.
   * `express-session` is a very straightforward and less abstract replacement for `passport`.
@@ -46,7 +52,7 @@ My ongoing/condensed notes on how this approach differs from our current stack/c
 * I'd be very excited to teach about what happens inside `sessionMiddleware.cjs`, especially getting students to understand the importance of  the `sameSite: true, httpOnly: true` cookie options. (This feels just as important as teaching about password hashing.)
 * I used `bcrypt` for the two util functions in `password.cjs`. Are we still thinking we want to switch to `argon2`?
 
-#### Client-Side Auth is Less Abstract using Context Instead of Redux/Redux/Saga.
+#### Client-side auth is less abstract using Context instead of Redux/Redux-Saga.
 
 Notes on Redux/Redux-Saga vs Context:
 * There is still a Provider component.
