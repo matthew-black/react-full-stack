@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import useAuth from '../../useAuth.jsx'
+import { useAuthContext } from '../../AuthContext.jsx'
 
 function AuthPage() {
-  const { register, logIn, logOut } = useAuth()
+  const { register, logIn, logOut } = useAuthContext()
 
   const [registerUsername, setRegisterUsername] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
@@ -46,7 +46,7 @@ function AuthPage() {
 
   return (
     <div>
-      <h1>Auth Page!</h1>
+      <h2>Auth Page:</h2>
       
       <form onSubmit={handleRegister}>
         <input

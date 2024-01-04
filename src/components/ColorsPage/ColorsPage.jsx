@@ -29,10 +29,11 @@ function ColorsPage() {
   }
 
   return (
-    <>
+    <div>
+      <h2>Colors Page:</h2>
       <ColorsForm colors={colors} fetchColors={fetchColors} />
       <ColorsList colors={colors} fetchColors={fetchColors}/>
-    </>
+    </div>
   )
 }
 

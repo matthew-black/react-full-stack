@@ -1,19 +1,19 @@
 import { NavLink } from "react-router-dom";
-import useAuth from '../../useAuth.jsx'
+import { useAuthContext } from '../../AuthContext.jsx'
 
 
 function Nav() {
-  const { user, logOut } = useAuth()
+  const { user, logOut } = useAuthContext()
 
   return (
   <nav>
+    <h2>Le Nav:</h2>
     <ul>
       <li>
         {user.id ? 
           <NavLink to="/colors">colors</NavLink>
-          :
-          <NavLink to="/auth">login/register</NavLink>
-        }
+                 :
+          <NavLink to="/auth">login/register</NavLink>}
       </li>
       <li>
         <NavLink
@@ -29,7 +29,12 @@ function Nav() {
           about
         </NavLink>
       </li>
-      {user.id && <li onClick={logOut}>log out</li>}
+      {user.id && 
+        <li>
+          <button onClick={logOut}>
+            log out
+          </button>
+        </li>}
     </ul>
   </nav>
   )

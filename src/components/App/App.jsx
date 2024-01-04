@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
-import useAuth from '../../useAuth.jsx'
+import { useAuthContext } from '../../AuthContext.jsx'
 
 import Nav from './Nav.jsx'
 import RequireAuth from './RequireAuth.jsx'
@@ -12,13 +12,14 @@ import ColorsPage from '../ColorsPage/ColorsPage.jsx'
 // TODO auth-based routing stuff:
 function App() {
   useEffect(() => {
-    getSessionUser()
+    setSessionUser()
   }, [])
   
-  const { user, getSessionUser } = useAuth()
+  const { user, setSessionUser } = useAuthContext()
 
   return (
     <div>
+      <h1>Highly Complex Web Application:</h1>
       <BrowserRouter>
         <Nav />
         <Routes>
