@@ -48,3 +48,8 @@ My ongoing/condensed notes on how this approach differs from our current stack/c
 #### How is Building a Complex CRUD App w/o Redux/Redux-Saga?
 
 * Forthcoming! 🔥
+
+## TO-DOs:
+
+* Refactor `users.router.cjs` to use `async/await`. It'll be so much more readable.
+* Break `AuthPage.jsx` into separate `RegisterForm`/`LoginForm` components.
