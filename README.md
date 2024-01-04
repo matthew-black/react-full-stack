@@ -45,6 +45,7 @@ My ongoing/condensed notes on how this approach differs from our current stack/c
     * https://stackoverflow.com/questions/69002252/jwt-token-based-authentication-vs-session-cookies-best-usage
 * I'd be very excited to teach about what happens inside `sessionMiddleware.cjs`, especially getting students to understand the importance of  the `sameSite: true, httpOnly: true` cookie options. (This feels just as important as teaching about password hashing.)
 * Not sure how to best organize files yet, but check out the `AuthContext.jsx` file. I left verbose comments that explain how it works, and especially how it high-level compares/contrasts to a Redux/Redux-Sagas implementation. This all feels very teachable to me. And valuable to teach. 🙂
+* I used `bcrypt` for the two util functions in `password.cjs`. Are we still thinking we want to switch to `argon2`?
 
 #### How is Building a Complex CRUD App w/o Redux/Redux-Saga?
 

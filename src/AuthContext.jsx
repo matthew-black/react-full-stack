@@ -14,12 +14,21 @@ import axios from 'axios'
 //    the context Provider's children can access context state
 //    and functions via a useBlahContext hook.
 
-// Create a piece of context:
+// Context should not be thought of as pure replacement of Redux:
+// * If used to hold ALL of an application's global state, it
+//   causes lots of unnecessary/performance-decreasing re-renders.
+// * I am not sure why, but multiple resources indicated this.
+// * The use case for Context is if you want to have a globally available
+//   piece of state that doesn't change often. Stuff like themes, locales,
+//   and user status.
+// * It is a great solution for this small handful of use cases.
+
+// Create an piece of context. Exciting stuff:
 const AuthContext = createContext()
 
 // This is a custom wrapper component. It's kinda like the
 // Redux Provider. But instead of handing it a store, it
-// takes a value prop. We're bundling up a piece of global
+// gets handed a value prop. We're bundling up a piece of global
 // state, and four auth-related functions, then feeding them
 // to the Provider as the value prop. This nice little care
 // package of auth goodies will be available within any React

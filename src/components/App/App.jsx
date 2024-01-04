@@ -9,12 +9,16 @@ import AboutPage from '../AboutPage/AboutPage.jsx'
 import AuthPage from '../AuthPage/AuthPage.jsx'
 import ColorsPage from '../ColorsPage/ColorsPage.jsx'
 
-// TODO auth-based routing stuff:
+
 function App() {
   useEffect(() => {
+    // If the current user has an active session, this function
+    // sets the AuthContext's user state to look something like:
+    // { id: 2, username: 'unicorn10' }
     setSessionUser()
   }, [])
   
+  // Hooking into AuthContext to get state and a function:
   const { user, setSessionUser } = useAuthContext()
 
   return (

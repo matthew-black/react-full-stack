@@ -63,6 +63,10 @@ router.post('/sessions', async (req, res) => {
           }
 
           // Create the session.user object:
+          // 🔥 This is where we need to store any user metadata that we
+          //    want accessible:
+          //      * Server-side: via req.session.user
+          //      * Client-side: via the useAuthContext hook's user state
           req.session.user = {
             id: user.id,
             username: user.username,
