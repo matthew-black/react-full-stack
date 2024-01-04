@@ -40,6 +40,7 @@ My ongoing/condensed notes on how this approach differs from our current stack/c
 #### Auth is Much Less Abstract w/o Redux/Redux-Saga/Passport.
 
 * I chose to use cookies/sessions rather than JWT.
+  * `express-session` is a very straightforward and less abstract replacement for `passport`.
   * The top answer to this question is why I went with cookies/sessions:
     * https://stackoverflow.com/questions/69002252/jwt-token-based-authentication-vs-session-cookies-best-usage
 * I'd be very excited to teach about what happens inside `sessionMiddleware.cjs`, especially getting students to understand the importance of  the `sameSite: true, httpOnly: true` cookie options. (This feels just as important as teaching about password hashing.)
