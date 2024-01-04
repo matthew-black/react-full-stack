@@ -1,27 +1,7 @@
 import { useState, createContext, useContext } from 'react'
 import axios from 'axios'
 
-// From Redux/Redux-Sage to Context:
-// 1. There is still a Provider component.
-//      * For each context you choose to create,
-//        you also create a custom wrapper component
-//        to act as the context's Provider.
-// 2. Instead of reducers and Saga functions housed in
-//    the Redux store, we use React state and JS functions
-//    that the context Provider exposes.
-// 3. Instead of useSelector to read global Redux state and
-//    useDispatch to yell at global Saga functions, any of
-//    the context Provider's children can access context state
-//    and functions via a useBlahContext hook.
 
-// Context should not be thought of as pure replacement of Redux:
-// * If used to hold ALL of an application's global state, it
-//   causes lots of unnecessary/performance-decreasing re-renders.
-// * I am not sure why, but multiple resources indicated this.
-// * The use case for Context is if you want to have a globally available
-//   piece of state that doesn't change often. Stuff like themes, locales,
-//   and user status.
-// * It is a great solution for this small handful of use cases.
 
 // Create an piece of context. Exciting stuff:
 const AuthContext = createContext()

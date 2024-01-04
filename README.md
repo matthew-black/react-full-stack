@@ -37,15 +37,36 @@ My ongoing/condensed notes on how this approach differs from our current stack/c
 * I haven't gotten all the way through this, but it's worth reading for some context on what React Router is exploring:
   * https://remix.run/blog/remixing-react-router
 
-#### Auth is Much Less Abstract w/o Redux/Redux-Saga/Passport.
+#### Server-Side, Auth is Much Less Abstract w/o Passport.
 
 * I chose to use cookies/sessions rather than JWT.
   * `express-session` is a very straightforward and less abstract replacement for `passport`.
   * The top answer to this question is why I went with cookies/sessions:
     * https://stackoverflow.com/questions/69002252/jwt-token-based-authentication-vs-session-cookies-best-usage
 * I'd be very excited to teach about what happens inside `sessionMiddleware.cjs`, especially getting students to understand the importance of  the `sameSite: true, httpOnly: true` cookie options. (This feels just as important as teaching about password hashing.)
-* Not sure how to best organize files yet, but check out the `AuthContext.jsx` file. I left verbose comments that explain how it works, and especially how it high-level compares/contrasts to a Redux/Redux-Sagas implementation. This all feels very teachable to me. And valuable to teach. 🙂
 * I used `bcrypt` for the two util functions in `password.cjs`. Are we still thinking we want to switch to `argon2`?
+
+#### Client-Side Auth is Less Abstract using Context Instead of Redux/Redux/Saga.
+
+Notes on Redux/Redux-Saga vs Context:
+* There is still a Provider component.
+    * For each context you choose to create, you also create a custom wrapper component to act as the context's Provider.
+* Instead of reducers and Saga functions housed in the Redux store, we use React state and JS functions that the context Provider exposes.
+* Instead of useSelector to read global Redux state and useDispatch to yell at global Saga functions, any of the context Provider's children can access context state and functions via a useBlahContext hook.
+
+When to use Context?
+* Context should **not** be thought of as pure replacement of Redux:
+  * If used to hold ALL of an application's global state, it'd causes lots of unnecessary/performance-decreasing re-renders.
+    * I am not sure why, but multiple resources indicated this.
+ * The **use case for Context** is if you need to have a globally available
+   piece of state that doesn't change often. Stuff like themes, locales,
+   and user status.
+  * It is a great solution for this small handful of use cases.
+
+Overview of how Context works in this app:
+* Check out how the `useAuthContext` hook gets used in the four files `import` it:
+    * <img src="./resources/useAuthContext.png" alt="the four components that use the useAuthContext hook" width="400px">
+* Check out the `AuthContext.jsx` file. I left verbose comments that explain how it works, and especially how it high-level compares/contrasts to a Redux/Redux-Sagas implementation. This all feels very teachable to me. And valuable to teach. 🙂
 
 #### How is Building a Complex CRUD App w/o Redux/Redux-Saga?
 
