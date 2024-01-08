@@ -16,6 +16,9 @@ function Nav() {
             <NavLink to="/login">login/register</NavLink>
         }
       </li>
+      <li>
+        <NavLink to="/">home</NavLink>
+      </li>
       { user.id &&
         <li>
           <NavLink to="/colors">colors</NavLink>

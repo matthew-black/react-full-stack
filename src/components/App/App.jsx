@@ -8,11 +8,11 @@ import Nav from './Nav.jsx'
 import RequireAuth from '../Auth/RequireAuth.jsx'
 import RejectAuth from '../Auth/RejectAuth.jsx'
 // Pages:
-import RegistrationPage from '../Auth/RegistrationPage.jsx'
-import LoginPage from '../Auth/LoginPage.jsx'
 import AboutPage from '../AboutPage/AboutPage.jsx'
 import ColorsPage from '../ColorsPage/ColorsPage.jsx'
-
+import HomePage from '../HomePage/HomePage.jsx'
+import LoginPage from '../Auth/LoginPage.jsx'
+import RegistrationPage from '../Auth/RegistrationPage.jsx'
 
 function App() {
   useEffect(() => {
@@ -33,7 +33,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Navigate to="/colors" />}
+            element={<HomePage />}
           />
           <Route
             path="/about"

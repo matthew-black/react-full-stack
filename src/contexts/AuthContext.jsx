@@ -2,7 +2,6 @@ import { useState, createContext, useContext } from 'react'
 import axios from 'axios'
 
 
-
 // Create an piece of context. Exciting stuff:
 const AuthContext = createContext()
 
