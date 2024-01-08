@@ -76,9 +76,18 @@ Overview of how Context works in this app:
 
 #### How is Building a Complex CRUD App w/o Redux/Redux-Saga?
 
-* Forthcoming! 🔥
+* What adds mental overhead?
+  * Only thing I've noticed so far is having to make choices about my own organizational structure.
+* What decreases mental overhead?
+  * So far, it's a win to not have to deal with the *so much extra* file-making and indirection. I feel a bit "closer" to what I'm trying to accomplish.
+* Extra tidbits:
+  * Building has been straightforward, and it's nice to know that I have `/src/contexts` waiting for me in the event of some kind of complicated state situation arising. It feels like a safety valve. I figured I'd prefer the straightforwardness of vanilla React, but I'm surprised at the *this-feels-nice*-ness of having said safety valve available.
 
 ## TO-DOs:
 
-* Refactor `users.router.cjs` to use `async/await`. It'll be so much more readable.
-* Break `AuthPage.jsx` into separate `RegisterForm`/`LoginForm` components.
+* Instead of a single PostItem component, should make:
+  * PostPreviewItem component (for home page)
+    * Has a "click here to read entire post" kinda thing.
+  * PostItem component (for my posts page)
+    * Has delete/edit/toggle-visibility actions available.
+* PostDetails component (for when a user wants to read and comment on a full post).
