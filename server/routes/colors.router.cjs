@@ -7,7 +7,6 @@ const routerPath = '/api/colors'
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log(`GET ${routerPath} received a request.`)
   const sqlText = `
     SELECT * FROM "colors"
       WHERE "user_id"=$1
@@ -17,7 +16,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
   pool.query(sqlText, sqlValues)
     .then((dbRes) => {
-      console.log(dbRes.rows)
       res.send(dbRes.rows)
     })
     .catch((dbErr) => {
@@ -27,8 +25,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-  console.log(`POST ${routerPath} received a request.`)
-  console.log('\tHere is req.body:', req.body)
   const sqlText = `
     INSERT INTO "colors"
       ("name", "user_id")
@@ -48,7 +44,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 })
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-  console.log(`DELETE ${routerPath}/:id received a request.`)
   const sqlText = `
     DELETE FROM "colors"
       WHERE "id"=$1 AND "user_id"=$2;

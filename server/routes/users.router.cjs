@@ -7,9 +7,6 @@ const router = express.Router()
 
 // POST /api/users (Creates a user. AKA: Registration.)
 router.post('/', (req, res) => {
-  console.log('POST /api/users received a request.')
-  console.log('\tHere is req.body:', req.body)
-
   const { username, password } = req.body
   const passwordHash = hash(password)
 
@@ -38,8 +35,6 @@ router.get('/sessions', (req, res) => {
 
 // POST /api/users/sessions (Creates a new session. AKA: Login.)
 router.post('/sessions', async (req, res) => {
-  console.log('POST /api/users/sessions received a request.')
-  console.log('\tHere is req.body:', req.body)
   const { username, password } = req.body
 
   const sqlText = `
