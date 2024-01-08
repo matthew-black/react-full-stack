@@ -3,12 +3,14 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx'
 
+// Nav + Auth Redirects:
 import Nav from './Nav.jsx'
-import RequireAuth from './RequireAuth.jsx'
-import RejectAuth from './RejectAuth.jsx'
+import RequireAuth from '../Auth/RequireAuth.jsx'
+import RejectAuth from '../Auth/RejectAuth.jsx'
+// Pages:
+import RegistrationPage from '../Auth/RegistrationPage.jsx'
+import LoginPage from '../Auth/LoginPage.jsx'
 import AboutPage from '../AboutPage/AboutPage.jsx'
-import RegistrationPage from '../AuthPages/RegistrationPage.jsx'
-import LoginPage from '../AuthPages/LoginPage.jsx'
 import ColorsPage from '../ColorsPage/ColorsPage.jsx'
 
 
@@ -20,7 +22,7 @@ function App() {
     setSessionUser()
   }, [])
   
-  // Hooking into AuthContext to get state and a function:
+  // Hooking into AuthContext to get a function:
   const { setSessionUser } = useAuthContext()
 
   return (
@@ -29,21 +31,36 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route path="/" element={<Navigate to="/colors" />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/registration" element={ <RejectAuth>
-                                                  <RegistrationPage />
-                                                </RejectAuth> }
+          <Route
+            path="/"
+            element={<Navigate to="/colors" />}
           />
-          <Route path="/login" element={  <RejectAuth>
-                                            <LoginPage />
-                                          </RejectAuth> }
+          <Route
+            path="/about"
+            element={<AboutPage />}
           />
-          <Route path="/colors" element={ <RequireAuth>
-                                            <ColorsPage />
-                                          </RequireAuth> }
+          <Route
+            path="/registration"
+            element={ <RejectAuth>
+                        <RegistrationPage />
+                      </RejectAuth> }
           />
-          <Route path="*" element={<h1>Hmm. That's not a thing.</h1>} />
+          <Route
+            path="/login"
+            element={ <RejectAuth>
+                        <LoginPage />
+                      </RejectAuth> }
+          />
+          <Route
+            path="/colors"
+            element={ <RequireAuth>
+                        <ColorsPage />
+                      </RequireAuth> }
+          />
+          <Route
+            path="*"
+            element={<h1>Hmm. That's not a thing.</h1>}
+          />
         </Routes>
       </BrowserRouter>
     </div>

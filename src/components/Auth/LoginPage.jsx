@@ -15,8 +15,7 @@ function LoginPage() {
 
     logIn(loginUsername, loginPassword)
       .then(() => {
-        console.log('successful login!')
-        navigate('/', { replace: true })
+        navigate('/')
       })
       .catch((error) => {
         console.log('loginUser fail:', error)
@@ -30,13 +29,13 @@ function LoginPage() {
       <form onSubmit={handleLogIn}>
         <input
           type="text"
-          placeholder="username"
+          placeholder="provide your username"
           value={loginUsername}
           onChange={(e) => setLoginUsername(e.target.value)}
         />
         <input
           type="password"
-          placeholder="password"
+          placeholder="enter your password"
           value={loginPassword}
           onChange={(e) => setLoginPassword(e.target.value)}
         />
