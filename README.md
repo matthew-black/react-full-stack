@@ -88,10 +88,19 @@ Overview of how Context works in this app:
 ## TO-DOs:
 
 * CreatePostPage
+* PostDetails component (for when a user wants to read and comment on a full post).
+
+## Refactoring TO-DOs:
+
+* All of the "functional" bits in the `[Thing]Page` components need to be extracted to actual components that live in the `/components` folder.
+  * Example: `/components/Auth/LoginForm.jsx` should be a thing that encapsulates Lines 29-45 of `LoginPage.jsx`
 * Instead of a single PostItem component, should make:
   * PostPreviewItem component (for home page)
     * Has a "click here to read entire post" kinda thing.
   * PostItem component (for my posts page)
     * Has delete/edit/toggle-visibility actions available.
-* PostDetails component (for when a user wants to read and comment on a full post).
 
+## Future TO-DOs:
+
+* I guess use some kind of component library to make this more closely resemble a typical student solo project? 🤷
+* Add some kind of API integration?
