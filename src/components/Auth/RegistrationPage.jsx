@@ -30,13 +30,13 @@ function RegistrationPage() {
       <form onSubmit={handleRegister}>
         <input
           type="text"
-          placeholder="choose a username"
+          placeholder="username"
           value={registerUsername}
           onChange={(e) => setRegisterUsername(e.target.value)}
         />
         <input
           type="password"
-          placeholder="enter a password"
+          placeholder="password"
           value={registerPassword}
           onChange={(e) => setRegisterPassword(e.target.value)}
         />

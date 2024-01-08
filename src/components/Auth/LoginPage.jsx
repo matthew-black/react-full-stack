@@ -29,13 +29,13 @@ function LoginPage() {
       <form onSubmit={handleLogIn}>
         <input
           type="text"
-          placeholder="provide your username"
+          placeholder="username"
           value={loginUsername}
           onChange={(e) => setLoginUsername(e.target.value)}
         />
         <input
           type="password"
-          placeholder="enter your password"
+          placeholder="password"
           value={loginPassword}
           onChange={(e) => setLoginPassword(e.target.value)}
         />
