@@ -1,5 +1,7 @@
 # React Full-Stack w/ Less Abstraction
 
+<img src="./resources/myPostsPage.png" alt="the my posts page view" width=600px>
+
 This is an exploration of building a React/Express app using newer tools/libraries/APIs. Eventually it'll be a multi-user blog with posts, comments, and likes. Maybe there will be some flexbox, because flexbox is all I really know. 🙂
 
 Things that are different from the post-Hooks Prime stack:
