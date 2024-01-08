@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './components/App/App.jsx'
-import AuthContextProvider from './AuthContext.jsx'
+import AuthContextProvider from './contexts/AuthContext.jsx'
 import './index.css'
 
 
