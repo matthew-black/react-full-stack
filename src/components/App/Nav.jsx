@@ -24,6 +24,11 @@ function Nav() {
           <NavLink to="/colors">colors</NavLink>
         </li>
       }
+      { user.id &&
+        <li>
+          <NavLink to="/my_posts">my posts</NavLink>
+        </li>
+      }
       <li>
         <NavLink to="/about">about</NavLink>
       </li>

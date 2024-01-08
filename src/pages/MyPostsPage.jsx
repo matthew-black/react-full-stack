@@ -5,34 +5,34 @@ import PostItem from '../components/Posts/PostItem.jsx'
 
 
 function HomePage() {
-  const [publicPosts, setPublicPosts] = useState([])
+  const [myPosts, setMyPosts] = useState([])
 
   useEffect(() => {
-    fetchPublicPosts()
+    fetchMyPosts()
 
   }, [])
 
-  const fetchPublicPosts = () => {
+  const fetchMyPosts = () => {
     axios({
       method: 'GET',
-      url: '/api/posts/public'
+      url: '/api/posts'
     })
       .then((response) => {
-        setPublicPosts(response.data)
+        setMyPosts(response.data)
       })
       .catch((error) => {
-        console.log('fetchPublicPosts fail:', error)
+        console.log('fetchMyPosts fail:', error)
       })
   }
 
   return (
     <div>
-      <h2>Home Page:</h2>
+      <h2>My Posts Page:</h2>
 
-      <h3>Recent Public Blog Posts:</h3>
+      <h3>My Blog Posts:</h3>
       <section>
         {
-          publicPosts.map((post) => (
+          myPosts.map((post) => (
             <PostItem key={post.id} post={post} />
           ))
         }

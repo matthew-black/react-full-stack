@@ -12,6 +12,7 @@ import AboutPage from '../../pages/AboutPage.jsx'
 import ColorsPage from '../../pages/ColorsPage.jsx'
 import HomePage from '../../pages/HomePage.jsx'
 import LoginPage from '../../pages/LoginPage.jsx'
+import MyPostsPage from '../../pages/MyPostsPage.jsx'
 import RegistrationPage from '../../pages/RegistrationPage.jsx'
 
 function App() {
@@ -55,6 +56,12 @@ function App() {
             path="/colors"
             element={ <RequireAuth>
                         <ColorsPage />
+                      </RequireAuth> }
+          />
+          <Route
+            path="/my_posts"
+            element={ <RequireAuth>
+                        <MyPostsPage />
                       </RequireAuth> }
           />
           <Route
