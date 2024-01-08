@@ -8,10 +8,18 @@ const routerPath = '/api/posts'
 router.get('/public', (req, res) => {
   console.log(`GET ${routerPath}/public received a request.`)
   const sqlText = `
-    SELECT * FROM "posts"
-      WHERE "is_public"=true
-      ORDER BY "inserted_at" DESC
-      LIMIT 5;
+    SELECT
+      posts.id,
+      posts.title,
+      posts.text_content,
+      posts.inserted_at,
+      users.username
+    FROM posts
+    JOIN users
+      ON posts.user_id=users.id
+    WHERE is_public=true
+    ORDER BY inserted_at DESC
+    LIMIT 5;
   `
 
   pool.query(sqlText)

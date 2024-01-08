@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import ColorsForm from './ColorsForm'
-import ColorsList from './ColorsList'
+import ColorsForm from '../components/Colors/ColorsForm'
+import ColorsList from '../components/Colors/ColorsList'
 
 
 function ColorsPage() {
