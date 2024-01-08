@@ -11,8 +11,8 @@ router.post('/', (req, res) => {
   const passwordHash = hash(password)
 
   const sqlText = `
-    INSERT INTO "users"
-      ("username", "password")
+    INSERT INTO users
+      (username, password)
       VALUES
       ($1, $2);
   `
@@ -38,8 +38,8 @@ router.post('/sessions', async (req, res) => {
   const { username, password } = req.body
 
   const sqlText = `
-    SELECT * FROM "users"
-      WHERE "username"=$1;
+    SELECT * FROM users
+      WHERE username=$1;
   `
   const sqlValues = [username]
 

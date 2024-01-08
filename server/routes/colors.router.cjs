@@ -8,9 +8,9 @@ const routerPath = '/api/colors'
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlText = `
-    SELECT * FROM "colors"
-      WHERE "user_id"=$1
-      ORDER BY "inserted_at";
+    SELECT * FROM colors
+      WHERE user_id=$1
+      ORDER BY inserted_at;
   `
   const sqlValues = [req.session.user.id]
 
@@ -26,8 +26,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
   const sqlText = `
-    INSERT INTO "colors"
-      ("name", "user_id")
+    INSERT INTO colors
+      (name, user_id)
       VALUES
       ($1, $2);
   `
@@ -45,8 +45,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = `
-    DELETE FROM "colors"
-      WHERE "id"=$1 AND "user_id"=$2;
+    DELETE FROM colors
+      WHERE id=$1 AND user_id=$2;
   `
   const sqlValues = [req.params.id, req.session.user.id]
 
