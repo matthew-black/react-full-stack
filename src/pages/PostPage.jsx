@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Post from '../components/Posts/Post.jsx'
+import CommentsList from '../components/Comments/CommenstList.jsx'
 
 
 function PostPage() {
@@ -30,24 +32,10 @@ function PostPage() {
   return (
     <div className="dev-outline">
       <h2>Post Page:</h2>
-      
-      <section>
-        <h3>{post.title}</h3>
-        <p>{post.text}</p>
-        <p><em>{post.username}, {post.inserted_at}</em></p>
-      </section>
+      <Post post={post} />
 
       <h4>Comments:</h4>
-      <section>
-      {
-        post.comments && post.comments.map((comment) => (
-          <div key={comment.id}>
-            {comment.text}
-            <p><em>{comment.username}, {comment.inserted_at}</em></p>
-          </div>
-        ))
-      }
-      </section>
+      <CommentsList comments={post.comments}/>
     </div>
   )
 }

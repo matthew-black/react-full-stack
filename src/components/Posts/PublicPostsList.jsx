@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import PostItem from './PostItem.jsx'
+import PostItem from './PostPreview.jsx'
 
 
 function PublicPostsList() {
