@@ -12,13 +12,14 @@ Things that are different from the post-Hooks Prime stack:
 
 ## Usage
 
-1. Create a `colors` database.
+1. Create a `blog` database.
+    * Or, create a database and name it `blizzard_kangaroo` for all I care. (You'll just need to make the `database` property also be `blizzard_kangaroo` over in `./server/modules/pool.cjs`).
 2. Run the queries from `/db/schema.sql`.
 3. Run the queries from `/db/seed.sql`.
 4. `npm install`.
 5. `npm run server`.
 6. `npm run client`.
-7. Enjoy using this very advanced application.
+7. Enjoy using this highly complex web application!
 
 ## Notes:
 
@@ -84,6 +85,8 @@ Overview of how Context works in this app:
   * So far, it's a win to not have to deal with the *so much extra* file-making and indirection. I feel a bit "closer" to what I'm trying to accomplish.
 * Extra tidbits:
   * Building has been straightforward, and it's nice to know that I have `/src/contexts` waiting for me in the event of some kind of complicated state situation arising. It feels like a safety valve. I figured I'd prefer the straightforwardness of vanilla React, but I'm surprised at the *this-feels-nice*-ness of having said safety valve available.
+
+---
 
 ## TO-DOs:
 
