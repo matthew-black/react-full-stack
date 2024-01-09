@@ -21,11 +21,6 @@ function Nav() {
       </li>
       { user.id &&
         <li>
-          <NavLink to="/colors">colors</NavLink>
-        </li>
-      }
-      { user.id &&
-        <li>
           <NavLink to="/my_posts">my posts</NavLink>
         </li>
       }

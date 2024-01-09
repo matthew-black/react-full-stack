@@ -7,7 +7,6 @@ const routerPath = '/api/posts'
 
 
 router.get('/public', (req, res) => {
-  console.log(`GET ${routerPath}/public received a request.`)
   const sqlText = `
     SELECT
       posts.*,

@@ -1,19 +1,17 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-
 import { useAuthContext } from '../../contexts/AuthContext.jsx'
-
 // Nav + Auth Redirects:
 import Nav from './Nav.jsx'
 import RequireAuth from '../Auth/RequireAuth.jsx'
 import RejectAuth from '../Auth/RejectAuth.jsx'
 // Pages:
 import AboutPage from '../../pages/AboutPage.jsx'
-import ColorsPage from '../../pages/ColorsPage.jsx'
 import HomePage from '../../pages/HomePage.jsx'
 import LoginPage from '../../pages/LoginPage.jsx'
 import MyPostsPage from '../../pages/MyPostsPage.jsx'
 import RegistrationPage from '../../pages/RegistrationPage.jsx'
+
 
 function App() {
   useEffect(() => {
@@ -51,12 +49,6 @@ function App() {
             element={ <RejectAuth>
                         <LoginPage />
                       </RejectAuth> }
-          />
-          <Route
-            path="/colors"
-            element={ <RequireAuth>
-                        <ColorsPage />
-                      </RequireAuth> }
           />
           <Route
             path="/my_posts"
