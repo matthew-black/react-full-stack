@@ -56,5 +56,27 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   })
 })
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+  const sqlText = `
+    INSERT INTO posts
+      (title, text_content, user_id)
+      VALUES
+      ($1, $2, $3);
+  `
+  const sqlValues = [
+    req.body.title,
+    req.body.textContent,
+    req.session.user.id
+  ]
+  pool.query(sqlText, sqlValues)
+  .then(() => {
+    res.sendStatus(201)
+  })
+  .catch((dbErr) => {
+    console.log('POST /api/posts fail:', dbErr)
+    res.sendStatus(500)
+  })
+})
+
 
 module.exports = router

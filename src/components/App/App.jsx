@@ -7,6 +7,7 @@ import RequireAuth from '../Auth/RequireAuth.jsx'
 import RejectAuth from '../Auth/RejectAuth.jsx'
 // Pages:
 import AboutPage from '../../pages/AboutPage.jsx'
+import CreatePostPage from '../../pages/CreatePostPage.jsx'
 import HomePage from '../../pages/HomePage.jsx'
 import LoginPage from '../../pages/LoginPage.jsx'
 import MyPostsPage from '../../pages/MyPostsPage.jsx'
@@ -54,6 +55,12 @@ function App() {
             path="/my_posts"
             element={ <RequireAuth>
                         <MyPostsPage />
+                      </RequireAuth> }
+          />
+          <Route
+            path="/create_post"
+            element={ <RequireAuth>
+                        <CreatePostPage />
                       </RequireAuth> }
           />
           <Route

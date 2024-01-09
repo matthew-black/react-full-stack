@@ -1,13 +1,21 @@
 body {
   background-color: rgb(225, 225, 225);
-  color: rgb(50, 50, 50);
+  color: #333;
 }
 
-nav a {
-  color: rgb(125, 125, 125);
+nav a, nav li {
+  color: #888;
   text-decoration: none;
 }
 
 nav a.active {
   color: rgb(50, 50, 50);
+}
+
+textarea, textarea::placeholder {
+  font-family: Arial;
+}
+
+p {
+  white-space: pre-wrap;
 }
