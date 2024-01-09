@@ -87,18 +87,18 @@ Overview of how Context works in this app:
 
 ## TO-DOs:
 
-* CreatePostPage
-* PostDetails component (for when a user wants to read and comment on a full post).
+* A logged-in user should be able to leave comments on public posts.
 
 ## Refactoring TO-DOs:
 
-* All of the "functional" bits in the `[Thing]Page` components need to be extracted to actual components that live in the `/components` folder.
-  * Example: `/components/Auth/LoginForm.jsx` should be a thing that encapsulates Lines 29-45 of `LoginPage.jsx`
+* All of the "functional" bits in the `[Thing]Page` components need to be extracted to actual components that live in the `/components` folder. (`CreatePostPage` and `PostPage` both need this treatment!)
 * Instead of a single PostItem component, should make:
   * PostPreviewItem component (for home page)
     * Has a "click here to read entire post" kinda thing.
   * PostItem component (for my posts page)
     * Has delete/edit/toggle-visibility actions available.
+  * **Or**, every PostItem should function as a PostPreview? This is why wireframing is nice.
+    * ✈️🙈
 
 ## Future TO-DOs:
 

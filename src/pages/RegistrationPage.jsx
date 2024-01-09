@@ -6,7 +6,7 @@ function RegistrationPage() {
   const navigate = useNavigate()
 
   return (
-    <div>
+    <div className="dev-outline">
       <h2>Registration Page:</h2>
       
       <RegistrationForm />

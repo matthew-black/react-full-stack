@@ -1,11 +1,11 @@
 const express = require('express')
-const { hash, verify } = require('../modules/password.cjs')
 const pool = require('../modules/pool.cjs')
+const { hash, verify } = require('../modules/password.cjs')
 
 const router = express.Router()
 
-
-// POST /api/users (Creates a user. AKA: Registration.)
+// POST /api/users
+  // Creates a user. AKA: Registration.
 router.post('/', (req, res) => {
   const { username, password } = req.body
   const passwordHash = hash(password)
@@ -28,12 +28,14 @@ router.post('/', (req, res) => {
     })
 })
 
-// GET /api/users/sessions (Responds with current session.user object or {})
+// GET /api/users/sessions
+  // Responds with current session.user object or {}.
 router.get('/sessions', (req, res) => {
   res.send(req.session.user || {})
 })
 
-// POST /api/users/sessions (Creates a new session. AKA: Login.)
+// POST /api/users/sessions
+  // Creates a new session. AKA: Login.
 router.post('/sessions', async (req, res) => {
   const { username, password } = req.body
 
@@ -91,7 +93,8 @@ router.post('/sessions', async (req, res) => {
   }
 })
 
-// DELETE /api/users/sessions (Deletes the current session. AKA: Logout.)
+// DELETE /api/users/sessions
+  // Deletes the current session. AKA: Logout.
 router.delete('/sessions', (req, res) => {
   req.session.user = null
 

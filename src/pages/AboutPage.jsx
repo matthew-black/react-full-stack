@@ -5,7 +5,7 @@ function AboutPage() {
   const { user } = useAuthContext()
 
   return (
-    <div>
+    <div className="dev-outline">
       <h2>About Page:</h2>
       {
         user.id ?

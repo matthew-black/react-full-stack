@@ -2,7 +2,7 @@ import { useState, createContext, useContext } from 'react'
 import axios from 'axios'
 
 
-// Create an piece of context. Exciting stuff:
+// Create a piece of context. Exciting stuff:
 const AuthContext = createContext()
 
 // This is a custom wrapper component. It's kinda like the
@@ -15,7 +15,7 @@ const AuthContext = createContext()
 export default function AuthContextProvider({ children }) {
   // Standard React state, but it will become global state
   // for this Provider's children:
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({id: null})
 
   // A then-able function that creates a new user:
   const register = (username, password) => {
@@ -64,7 +64,7 @@ export default function AuthContextProvider({ children }) {
   }
 
   // A then-able function that sets the user state to the
-  // current user's data, if a session is active:
+  // current session user's data (or an empty object):
   const setSessionUser = () => {
     return new Promise((resolve, reject) => {
       axios({
@@ -73,9 +73,7 @@ export default function AuthContextProvider({ children }) {
       })
         .then((response) => {
           const sessionUser = response.data
-          if (sessionUser.id) {
-            setUser(sessionUser)
-          }
+          setUser(sessionUser)
           resolve()
         })
         .catch((error) => {

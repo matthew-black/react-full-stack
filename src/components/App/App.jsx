@@ -11,6 +11,7 @@ import CreatePostPage from '../../pages/CreatePostPage.jsx'
 import HomePage from '../../pages/HomePage.jsx'
 import LoginPage from '../../pages/LoginPage.jsx'
 import MyPostsPage from '../../pages/MyPostsPage.jsx'
+import PostPage from '../../pages/PostPage.jsx'
 import RegistrationPage from '../../pages/RegistrationPage.jsx'
 
 
@@ -27,17 +28,17 @@ function App() {
 
   return (
     <div>
-      <h1>Highly Complex Web Application:</h1>
+      <h1 className="pink-text">Highly Complex Web Application:</h1>
       <BrowserRouter>
         <Nav />
         <Routes>
           <Route
             path="/"
-            element={<HomePage />}
+            element={ <HomePage /> }
           />
           <Route
             path="/about"
-            element={<AboutPage />}
+            element={ <AboutPage /> }
           />
           <Route
             path="/registration"
@@ -52,16 +53,20 @@ function App() {
                       </RejectAuth> }
           />
           <Route
-            path="/my_posts"
+            exact path="/user_posts"
             element={ <RequireAuth>
                         <MyPostsPage />
                       </RequireAuth> }
           />
           <Route
-            path="/create_post"
+            exact path="/new_post"
             element={ <RequireAuth>
                         <CreatePostPage />
                       </RequireAuth> }
+          />
+          <Route
+            exact path="/posts/:id"
+            element={ <PostPage /> }
           />
           <Route
             path="*"

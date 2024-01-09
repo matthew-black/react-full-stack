@@ -17,16 +17,24 @@ function CreatePostPage() {
       url: '/api/posts',
       data: { title, textContent }
     })
-      .then(() => {
-        navigate('/my_posts') // TO-DO navigate to /posts/:id
+      .then((response) => {
+        console.log('response.data is:', response.data)
+        const newPostID = response.data.id
+        navigate(`/posts/${newPostID}`) // TO-DO navigate to /posts/:id
       })
       .catch((error) => {
         console.log('createPost fail:', error)
       })
   }
 
+  const cancel = (e) => {
+    e.preventDefault()
+
+    navigate('/')
+  }
+
   return (
-    <div>
+    <div className="dev-outline">
       <h2>Create Post Page:</h2>
       <form onSubmit={createPost}>
         <input
@@ -42,6 +50,9 @@ function CreatePostPage() {
           rows="20"
           wrap="hard"></textarea>
         <button>Submit</button>
+        <button onClick={cancel}>
+          Cancel
+        </button>
       </form>
     </div>
 

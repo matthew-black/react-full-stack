@@ -1,13 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from '../../contexts/AuthContext.jsx'
 
 
 function Nav() {
   const { user, logOut } = useAuthContext()
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    logOut()
+      .finally(() => {
+        navigate('/')
+      })
+  }
 
   return (
-  <nav>
-    <h2>Le Nav:</h2>
+  <nav className="dev-outline">
+    <h2>Nav:</h2>
     <ul>
       <li>
         { user.id ? 
@@ -22,10 +30,10 @@ function Nav() {
       { user.id &&
       <>
         <li>
-          <NavLink to="/my_posts">my posts</NavLink>
+          <NavLink to="/user_posts">my posts</NavLink>
         </li>
         <li>
-          <NavLink to="/create_post">write a post</NavLink>
+          <NavLink to="/new_post">write a post</NavLink>
         </li>
       </>
       }
@@ -34,7 +42,7 @@ function Nav() {
       </li>
       { user.id && 
         <li>
-          <button onClick={logOut}>log out</button>
+          <button onClick={handleLogOut}>log out</button>
         </li>
       }
     </ul>

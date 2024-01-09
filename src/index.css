@@ -4,12 +4,12 @@ body {
 }
 
 nav a, nav li {
-  color: #888;
+  color: #333;
   text-decoration: none;
 }
 
 nav a.active {
-  color: rgb(50, 50, 50);
+  color:deeppink;
 }
 
 textarea, textarea::placeholder {
@@ -18,4 +18,12 @@ textarea, textarea::placeholder {
 
 p {
   white-space: pre-wrap;
+}
+
+.pink-text {
+  color: deeppink;
+}
+
+.dev-outline {
+  outline: 2px solid deeppink;
 }
