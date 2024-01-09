@@ -20,7 +20,7 @@ function CreatePostPage() {
       .then((response) => {
         console.log('response.data is:', response.data)
         const newPostID = response.data.id
-        navigate(`/posts/${newPostID}`) // TO-DO navigate to /posts/:id
+        navigate(`/posts/${newPostID}`)
       })
       .catch((error) => {
         console.log('createPost fail:', error)
