@@ -130,6 +130,56 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// POST /api/posts
+  // Creates a new post.
+router.post('/', rejectUnauthenticated, (req, res) => {
+  const sqlText = `
+    INSERT INTO posts
+      (title, text, user_id)
+      VALUES
+      ($1, $2, $3)
+      RETURNING id;
+  `
+  const sqlValues = [
+    req.body.title,
+    req.body.textContent,
+    req.session.user.id
+  ]
+
+  pool.query(sqlText, sqlValues)
+  .then((dbRes) => res.status(201).send(dbRes.rows[0]))
+  .catch((dbErr) => {
+    console.log('POST /api/posts fail:', dbErr)
+    res.sendStatus(500)
+  })
+})
+
+// PUT /api/posts/:id/toggle_visibility
+  // Toggles the boolean value of a given post's is_public column.
+router.put('/:id/toggle_visibility', rejectUnauthenticated, (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    res.sendStatus(400)
+    return
+  }
+
+  const sqlText = `
+    UPDATE posts
+      SET is_public=NOT is_public
+      WHERE id=$1 and user_id=$2;
+  `
+  const sqlValues = [
+    req.params.id,
+    req.session.user.id
+  ]
+
+  pool.query(sqlText, sqlValues)
+    .then(() => res.sendStatus(200))
+    .catch((dbErr) => {
+      console.log('PUT /api/posts/:id/toggle_visibility fail:', dbErr)
+      res.sendStatus(500)
+    })
+})
+
 // GET /api/posts/:id/comments
   // Responds with a single post's comments.
 router.get('/:id/comments', rejectUnauthenticated, (req, res) => {
@@ -164,30 +214,6 @@ router.get('/:id/comments', rejectUnauthenticated, (req, res) => {
       console.log('GET /api/posts/:id/comments fail', dbErr)
       res.sendStatus(500)
     })
-})
-
-// POST /api/posts
-  // Creates a new post.
-router.post('/', rejectUnauthenticated, (req, res) => {
-  const sqlText = `
-    INSERT INTO posts
-      (title, text, user_id)
-      VALUES
-      ($1, $2, $3)
-      RETURNING id;
-  `
-  const sqlValues = [
-    req.body.title,
-    req.body.textContent,
-    req.session.user.id
-  ]
-
-  pool.query(sqlText, sqlValues)
-  .then((dbRes) => res.status(201).send(dbRes.rows[0]))
-  .catch((dbErr) => {
-    console.log('POST /api/posts fail:', dbErr)
-    res.sendStatus(500)
-  })
 })
 
 

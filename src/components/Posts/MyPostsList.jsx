@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import PostPreview from './PostPreviewItem.jsx'
+import PostPreviewItem from './PostPreviewItem.jsx'
 
 
 function MyPostsList() {
@@ -20,7 +20,11 @@ function MyPostsList() {
     <section>
       {
         myPosts.map((post) => (
-          <PostPreview key={post.id} post={post} />
+          <PostPreviewItem 
+            key={post.id}
+            post={post}
+            fetchPosts={fetchMyPosts}
+            isActionable={true} />
         ))
       }
     </section>
