@@ -91,9 +91,10 @@ Overview of how Context works in this app:
 ## TO-DOs:
 
 * Post and PostPreviewItem both need conditionally rendered:
-  * Private/public toggle.
+  * Private/public toggle. (✅PostPreviewItem)
   * Edit button.
   * Delete button.
+* Likes for posts/comments.
 
 ## Refactoring TO-DOs:
 
@@ -108,6 +109,5 @@ if (isNaN(Number(req.params.id))) {
 
 ## Future TO-DOs:
 
-* Likes. (Posts and comments.)
 * I guess use some kind of component library to make this more closely resemble a typical student solo project? 🤷
 * Add some kind of API integration?
