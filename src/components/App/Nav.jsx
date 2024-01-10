@@ -15,7 +15,7 @@ function Nav() {
   }
 
   return (
-  <nav className="dev-outline">
+  <nav>
     <h2>Nav:</h2>
     <ul>
       <li>

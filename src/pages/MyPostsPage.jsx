@@ -4,7 +4,7 @@ import MyPostsList from '../components/Posts/MyPostsList.jsx'
 function MyPostsPage() {
 
   return (
-    <div className="dev-outline">
+    <div>
       <h2>My Posts Page:</h2>
 
       <h3>My Blog Posts:</h3>

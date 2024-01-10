@@ -36,7 +36,7 @@ function PostPage() {
   }
 
   return (
-    <div className="dev-outline">
+    <div>
       <h2>Post Page:</h2>
       <Post post={post} />
 

@@ -6,7 +6,7 @@ function LoginPage() {
   const navigate = useNavigate()
 
   return (
-    <div className="dev-outline">
+    <div>
       <h2>Log-In Page:</h2>
       
       <LoginForm />
