@@ -4,27 +4,20 @@ import { useNavigate } from 'react-router-dom'
 
 
 function CreatePostForm() {
-  const [title, setTitle] = useState('')
-  const [textContent, setTextContent] = useState('')  
-
   const navigate = useNavigate()
+  const [ title, setTitle ] = useState('')
+  const [ textContent, setTextContent ] = useState('')  
 
   const createPost = (e) => {
     e.preventDefault()
 
-    axios({
-      method: 'POST',
-      url: '/api/posts',
-      data: { title, textContent }
-    })
+    axios.post('/api/posts', {title, textContent})
       .then((response) => {
         console.log('response.data is:', response.data)
         const newPostID = response.data.id
         navigate(`/posts/${newPostID}`)
       })
-      .catch((error) => {
-        console.log('createPost fail:', error)
-      })
+      .catch((error) => console.log('createPost fail:', error))
   }
 
   const cancel = (e) => {

@@ -11,7 +11,9 @@ function LoginPage() {
       
       <LoginForm />
 
-      <button onClick={() => navigate('/registration')}>Go to Registration</button>
+      <button onClick={() => navigate('/registration')}>
+        Go to Registration
+      </button>
     </div>
   )
 }

@@ -1,6 +1,7 @@
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-function Post({post}) {
+// TO-DO: expose DELETE, EDIT, and PUBLIC/PRIVATE actions
+//        to logged-in users if the post belongs to them
+
+function Post({ post }) {
 
   return (
     <section>

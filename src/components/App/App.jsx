@@ -20,6 +20,9 @@ function App() {
     // If the current user has an active session, this function
     // sets the AuthContext's user state to look something like:
     // { id: 2, username: 'unicorn10' }
+    // Else if the current user does not have an active session,
+    // this function sets the AuthContext's user state to:
+    // {}
     setSessionUser()
   }, [])
   

@@ -1,7 +1,9 @@
+// TO-DO: expose DELETE, EDIT, and PUBLIC/PRIVATE actions
+//        to logged-in users if the post belongs to them
 import { useNavigate } from 'react-router-dom'
 
 
-function PostPreview({post}) {
+function PostPreview({ post }) {
   const navigate = useNavigate()
 
   const viewPost = () => {

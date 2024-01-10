@@ -1,7 +1,7 @@
 import MyPostsList from '../components/Posts/MyPostsList.jsx'
 
 
-function HomePage() {
+function MyPostsPage() {
 
   return (
     <div className="dev-outline">
@@ -14,4 +14,4 @@ function HomePage() {
 }
 
 
-export default HomePage
+export default MyPostsPage

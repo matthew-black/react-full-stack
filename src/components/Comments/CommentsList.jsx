@@ -1,4 +1,4 @@
-function CommentsList({comments}) {
+function CommentsList({ comments }) {
 
   return (
     <section>

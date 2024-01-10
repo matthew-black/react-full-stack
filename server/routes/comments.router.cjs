@@ -19,14 +19,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     req.session.user.id,
     req.body.postId
   ]
+
   pool.query(sqlText, sqlValues)
-  .then(() => {
-    res.sendStatus(201)
-  })
-  .catch((dbErr) => {
-    console.log('POST /api/comments fail:', dbErr)
-    res.sendStatus(500)
-  })
+    .then(() => res.sendStatus(201))
+    .catch((dbErr) => {
+      console.log('POST /api/comments fail:', dbErr)
+      res.sendStatus(500)
+    })
 })
 
 

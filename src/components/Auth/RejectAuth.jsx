@@ -10,7 +10,8 @@ function RejectAuth({ children }) {
     // the homepage:
     return <Navigate to='/' replace />
   } else {
-    // If not, the user is routed to the correct page:
+    // If there's not a logged-in user, this component will render whatever
+    // the child components are:
     return children
   }
 }

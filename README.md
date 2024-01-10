@@ -90,20 +90,13 @@ Overview of how Context works in this app:
 
 ## TO-DOs:
 
-* A logged-in user should be able to leave comments on public posts.
-
-## Refactoring TO-DOs:
-
-* All of the "functional" bits in the `[Thing]Page` components need to be extracted to actual components that live in the `/components` folder. (`CreatePostPage` and `PostPage` both need this treatment!)
-* Instead of a single PostItem component, should make:
-  * PostPreviewItem component (for home page)
-    * Has a "click here to read entire post" kinda thing.
-  * PostItem component (for my posts page)
-    * Has delete/edit/toggle-visibility actions available.
-  * **Or**, every PostItem should function as a PostPreview? This is why wireframing is nice.
-    * ✈️🙈
+* Post and PostPreviewItem both need conditionally rendered:
+  * Private/public toggle.
+  * Edit button.
+  * Delete button.
 
 ## Future TO-DOs:
 
+* Likes. (Posts and comments.)
 * I guess use some kind of component library to make this more closely resemble a typical student solo project? 🤷
 * Add some kind of API integration?

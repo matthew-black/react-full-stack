@@ -22,9 +22,7 @@ router.get('/public', (req, res) => {
   `
 
   pool.query(sqlText)
-    .then((dbRes) => {
-      res.send(dbRes.rows)
-    })
+    .then((dbRes) => res.send(dbRes.rows))
     .catch((dbErr) => {
       console.log('GET /api/posts/public fail:', dbErr)
       res.sendStatus(500)
@@ -49,9 +47,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlValues = [req.session.user.id]
 
   pool.query(sqlText, sqlValues)
-  .then((dbRes) => {
-    res.send(dbRes.rows)
-  })
+  .then((dbRes) => res.send(dbRes.rows))
   .catch((dbErr) => {
     console.log('GET /api/posts fail:', dbErr)
     res.sendStatus(500)
@@ -95,8 +91,11 @@ router.get('/:id', (req, res) => {
     ORDER BY
       comments_with_usernames.comment_inserted_at ASC;
   `
-  const sqlValues = [req.params.id, req.session.user?.id]
-
+  const sqlValues = [
+    req.params.id,
+    req.session.user?.id
+  ]
+    
   pool.query(sqlText, sqlValues)
     .then((dbRes) => {
       if (!dbRes.rows[0]) {
@@ -105,7 +104,7 @@ router.get('/:id', (req, res) => {
       }
       const { id, title, text, is_public, username, inserted_at, updated_at } = dbRes.rows[0]
       
-      const post = { id, title, text, is_public, username, inserted_at, updated_at }
+      const post = {id, title, text, is_public, username, inserted_at, updated_at}
       
       if (dbRes.rows[0].comment_id) {
         // If there are associated comments, post.comments is an array of comment objects:
@@ -152,6 +151,7 @@ router.get('/:id/comments', rejectUnauthenticated, (req, res) => {
       ORDER BY inserted_at ASC;
   `
   const sqlValues = [req.params.id]
+
   pool.query(sqlText, sqlValues)
     .then((dbRes) => {
       if (!dbRes.rows[0]) {
@@ -181,10 +181,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     req.body.textContent,
     req.session.user.id
   ]
+
   pool.query(sqlText, sqlValues)
-  .then((dbRes) => {
-    res.status(201).send(dbRes.rows[0])
-  })
+  .then((dbRes) => res.status(201).send(dbRes.rows[0]))
   .catch((dbErr) => {
     console.log('POST /api/posts fail:', dbErr)
     res.sendStatus(500)

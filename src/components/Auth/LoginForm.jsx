@@ -4,23 +4,17 @@ import { useAuthContext } from '../../contexts/AuthContext.jsx'
 
 
 function LoginForm() {
-  const { logIn } = useAuthContext()
-  
-  const [loginUsername, setLoginUsername] = useState('')
-  const [loginPassword, setLoginPassword] = useState('')
-
   const navigate = useNavigate()
+  const { logIn } = useAuthContext()
+  const [ loginUsername, setLoginUsername ] = useState('')
+  const [ loginPassword, setLoginPassword ] = useState('')
 
   const handleLogIn = (e) => {
     e.preventDefault()
 
     logIn(loginUsername, loginPassword)
-      .then(() => {
-        navigate('/')
-      })
-      .catch((error) => {
-        console.log('loginUser fail:', error)
-      })
+      .then(() => navigate('/'))
+      .catch((error) => console.log('handleLogIn fail:', error))
   }
   
   return (

@@ -4,24 +4,17 @@ import { useAuthContext } from '../../contexts/AuthContext.jsx'
 
 
 function RegistrationForm() {
-  const { register } = useAuthContext()
-
-  const [registerUsername, setRegisterUsername] = useState('')
-  const [registerPassword, setRegisterPassword] = useState('')
-
   const navigate = useNavigate()
+  const { register } = useAuthContext()
+  const [ registerUsername, setRegisterUsername ] = useState('')
+  const [ registerPassword, setRegisterPassword ] = useState('')
 
   const handleRegister = (e) => {
     e.preventDefault()
 
     register(registerUsername, registerPassword)
-      .then(() => {
-        console.log('successful registeration!')
-        navigate('/login', { replace: true })
-      })
-      .catch((error) => {
-        console.log('registerUser fail:', error)
-      })
+      .then(() => navigate('/login', {replace: true}))
+      .catch((error) => console.log('handleRegister fail:', error))
   }
 
   return (

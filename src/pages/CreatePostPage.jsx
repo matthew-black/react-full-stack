@@ -8,7 +8,6 @@ function CreatePostPage() {
       <h2>Create Post Page:</h2>
       <CreatePostForm />
     </div>
-
   )
 }
 

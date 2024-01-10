@@ -7,19 +7,16 @@ function RequireAuth({ children }) {
 
   if (user.id === null) {
     // If user.id is null, that means AuthContextProvider's user state
-    // is still evaluating to the default value. This means that we're
-    // waiting on AuthContextProvider's setSessionUser function to finish
-    // its job, which will set user to a valid user object or an empty object.
-    // Essentially, we're waiting to know whether or not there is a logged-in
-    // user. So, instead of rendering children or redirecting to /login, we
-    // just return null, which causes nothing to happen:
+    // has not yet been discovered and set by setSessionUser.
+    // By returning null, we are essentially waiting for setSessionUser
+    // to finish its job.
     return null
   } else if (user.id) {
     // If there's a logged-in user, this component will render whatever
-    // its child components are:
+    // the child components are:
     return children
   } else {
-    // If not, it redirects to /login:
+    // If there's not a logged-in user, it redirects to /login:
     return <Navigate to="/login" replace />
   }
 }

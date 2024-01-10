@@ -11,7 +11,4 @@ function verify(submittedPassword, storedHash) {
   return bcrypt.compareSync(submittedPassword, storedHash)
 }
 
-module.exports = {
-  hash: hash,
-  verify: verify
-}
+module.exports = {hash, verify}

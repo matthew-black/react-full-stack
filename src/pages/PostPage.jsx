@@ -9,22 +9,18 @@ import CommentsList from '../components/Comments/CommentsList.jsx'
 
 function PostPage() {
   const { id: postId } = useParams()
-  const navigate = useNavigate()
-  const { user } = useAuthContext()
-  const [post, setPost] = useState({})
-
+  
   useEffect(() => {
     fetchPost()
   }, [postId])
 
+  const navigate = useNavigate()
+  const { user } = useAuthContext()
+  const [ post, setPost ] = useState({})
+
   const fetchPost = () => {
-    axios({
-      method: 'GET',
-      url: `/api/posts/${postId}`
-    })
-      .then((response) => {
-        setPost(response.data)
-      })
+    axios.get(`/api/posts/${postId}`)
+      .then((response) => setPost(response.data))
       .catch((error) => {
         console.log('fetchPost fail:', error)
         if (error.response.status === 400) {
@@ -34,16 +30,9 @@ function PostPage() {
   }
 
   const fetchPostComments = () => {
-    axios({
-      method: 'GET',
-      url: `/api/posts/${postId}/comments`
-    })
-      .then((response) => {
-        setPost({...post, comments: response.data})
-      })
-      .catch((error) => {
-        console.log('fetchPostComments fail', error)
-      })
+    axios.get(`/api/posts/${postId}/comments`)
+      .then((response) => setPost({...post, comments: response.data}))
+      .catch((error) => console.log('fetchPostComments fail', error))
   }
 
   return (
@@ -53,9 +42,11 @@ function PostPage() {
 
       <h4>Comments:</h4>
 
-      { user.id && <CommentForm
+      { 
+        user.id && <CommentForm
                       postId={postId}
-                      fetchPostComments={fetchPostComments} /> }
+                      fetchPostComments={fetchPostComments} />
+      }
 
       <CommentsList comments={post.comments}/>
     </div>

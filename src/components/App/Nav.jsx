@@ -1,15 +1,16 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext.jsx'
 
 
 function Nav() {
-  const { user, logOut } = useAuthContext()
   const navigate = useNavigate()
+  const { user, logOut } = useAuthContext()
 
   const handleLogOut = () => {
     logOut()
-      .finally(() => {
-        navigate('/')
+      .then(() => navigate('/'))
+      .catch((error) => {
+        console.log('handleLogOut fail:', error)
       })
   }
 
@@ -18,7 +19,8 @@ function Nav() {
     <h2>Nav:</h2>
     <ul>
       <li>
-        { user.id ? 
+        { 
+          user.id ? 
             `hello, ${user.username}`
                   :
             <NavLink to="/login">login/register</NavLink>
@@ -27,23 +29,25 @@ function Nav() {
       <li>
         <NavLink to="/">home</NavLink>
       </li>
-      { user.id &&
-      <>
-        <li>
-          <NavLink to="/user_posts">my posts</NavLink>
-        </li>
-        <li>
-          <NavLink to="/new_post">write a post</NavLink>
-        </li>
-      </>
+      { 
+        user.id &&
+          <>
+            <li>
+              <NavLink to="/user_posts">my posts</NavLink>
+            </li>
+            <li>
+              <NavLink to="/new_post">write a post</NavLink>
+            </li>
+          </>
       }
       <li>
         <NavLink to="/about">about</NavLink>
       </li>
-      { user.id && 
-        <li>
-          <button onClick={handleLogOut}>log out</button>
-        </li>
+      { 
+        user.id && 
+          <li>
+            <button onClick={handleLogOut}>log out</button>
+          </li>
       }
     </ul>
   </nav>

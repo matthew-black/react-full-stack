@@ -16,12 +16,13 @@ router.post('/', (req, res) => {
       VALUES
       ($1, $2);
   `
-  const sqlValues = [username, passwordHash]
+  const sqlValues = [
+    username,
+    passwordHash
+  ]
   
   pool.query(sqlText, sqlValues)
-    .then((dbRes) => {
-      res.sendStatus(201)
-    })
+    .then((dbRes) => res.sendStatus(201))
     .catch((dbErr) => {
       console.log('POST /api/users fail:', dbErr)
       res.sendStatus(500)
@@ -49,40 +50,36 @@ router.post('/sessions', async (req, res) => {
     const dbRes = await pool.query(sqlText, sqlValues)
     const user = dbRes.rows[0]
     
-    if (user) {
-      if (verify(password, user.password)) {
-        // regenerate the session, which is good practice to help
-        // guard against forms of session fixation
-        req.session.regenerate((regenErr) => {
-          if (regenErr) {
-            console.log('regenErr in POST /api/users/sessions:', regenErr)
+    if (user && verify(password, user.password)) {
+      // regenerate the session, which is good practice to help
+      // guard against forms of session fixation
+      req.session.regenerate((regenErr) => {
+        if (regenErr) {
+          console.log('regenErr in POST /api/users/sessions:', regenErr)
+          res.sendStatus(500)
+        }
+
+        // Create the session.user object:
+        // 🔥 This is where we need to store any user metadata that we
+        //    want accessible:
+        //      * Server-side: via req.session.user
+        //      * Client-side: via the useAuthContext hook's user state
+        req.session.user = {
+          id: user.id,
+          username: user.username,
+        }
+
+        // Save the session:
+        req.session.save((saveErr) => {
+          if (saveErr) {
+            console.log('saveErr in POST /api/users/sessions:', saveErr)
             res.sendStatus(500)
           }
-
-          // Create the session.user object:
-          // 🔥 This is where we need to store any user metadata that we
-          //    want accessible:
-          //      * Server-side: via req.session.user
-          //      * Client-side: via the useAuthContext hook's user state
-          req.session.user = {
-            id: user.id,
-            username: user.username,
-          }
-
-          // Save the session:
-          req.session.save((saveErr) => {
-            if (saveErr) {
-              console.log('saveErr in POST /api/users/sessions:', saveErr)
-              res.sendStatus(500)
-            }
-            // Tell client that the session has been created:
-            res.sendStatus(201)
-          })
+          // Tell client that the session has been created:
+          res.sendStatus(201)
         })
-      } else {
-        // Invalid credentials!
-        res.sendStatus(401)
-      }
+      })
+      
     } else {
       // Invalid credentials!
       res.sendStatus(401)

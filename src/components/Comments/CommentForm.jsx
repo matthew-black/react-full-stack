@@ -2,24 +2,18 @@ import { useState } from 'react'
 import axios from 'axios'
 
 
-function CommentForm({postId, fetchPostComments}) {
-  const [textContent, setTextContent] = useState('')
+function CommentForm({ postId, fetchPostComments }) {
+  const [ textContent, setTextContent ] = useState('')
 
   const createComment = (e) => {
     e.preventDefault()
 
-    axios({
-      method: 'POST',
-      url: '/api/comments',
-      data: { textContent, postId }
-    })
+    axios.post('/api/comments', {textContent, postId})
       .then(() => {
         setTextContent('')
         fetchPostComments()
       })
-      .catch((error) => {
-        console.log('createComment fail:', error)
-      })
+      .catch((error) => console.log('createComment fail:', error))
   }
 
   return (

@@ -11,7 +11,9 @@ function RegistrationPage() {
       
       <RegistrationForm />
 
-      <button onClick={() => navigate('/login')}>Go to Login</button>
+      <button onClick={() => navigate('/login')}>
+        Go to Login
+      </button>
     </div>
   )
 }

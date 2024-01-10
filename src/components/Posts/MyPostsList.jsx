@@ -1,33 +1,26 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import PostItem from './PostPreview.jsx'
+import PostPreview from './PostPreviewItem.jsx'
 
 
 function MyPostsList() {
-  const [myPosts, setMyPosts] = useState([])
-
   useEffect(() => {
     fetchMyPosts()
   }, [])
 
+  const [ myPosts, setMyPosts ] = useState([])
+
   const fetchMyPosts = () => {
-    axios({
-      method: 'GET',
-      url: '/api/posts'
-    })
-      .then((response) => {
-        setMyPosts(response.data)
-      })
-      .catch((error) => {
-        console.log('fetchMyPosts fail:', error)
-      })
+    axios.get('/api/posts')
+      .then((response) => setMyPosts(response.data))
+      .catch((error) => console.log('fetchMyPosts fail:', error))
   }
 
   return (
     <section>
       {
         myPosts.map((post) => (
-          <PostItem key={post.id} post={post} />
+          <PostPreview key={post.id} post={post} />
         ))
       }
     </section>
