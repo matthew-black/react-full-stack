@@ -131,6 +131,41 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// GET /api/posts/:id/comments
+  // Responds with a single post's comments.
+router.get('/:id/comments', rejectUnauthenticated, (req, res) => {
+  if (isNaN(Number(req.params.id))) {
+    res.sendStatus(400)
+    return
+  }
+
+  const sqlText = `
+    SELECT
+      comments.id,
+      comments.text,
+      comments.inserted_at,
+      users.username
+    FROM comments
+    INNER JOIN users
+      ON comments.user_id=users.id
+      WHERE comments.post_id=$1
+      ORDER BY inserted_at ASC;
+  `
+  const sqlValues = [req.params.id]
+  pool.query(sqlText, sqlValues)
+    .then((dbRes) => {
+      if (!dbRes.rows[0]) {
+        res.sendStatus(400)
+        return
+      }
+      res.send(dbRes.rows)
+    })
+    .catch((dbErr) => {
+      console.log('GET /api/posts/:id/comments fail', dbErr)
+      res.sendStatus(500)
+    })
+})
+
 // POST /api/posts
   // Creates a new post.
 router.post('/', rejectUnauthenticated, (req, res) => {

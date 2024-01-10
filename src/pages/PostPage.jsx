@@ -1,23 +1,26 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useAuthContext } from '../contexts/AuthContext.jsx'
 import Post from '../components/Posts/Post.jsx'
-import CommentsList from '../components/Comments/CommenstList.jsx'
+import CommentForm from '../components/Comments/CommentForm.jsx'
+import CommentsList from '../components/Comments/CommentsList.jsx'
 
 
 function PostPage() {
-  const { id } = useParams()
-  const [post, setPost] = useState({})
+  const { id: postId } = useParams()
   const navigate = useNavigate()
+  const { user } = useAuthContext()
+  const [post, setPost] = useState({})
 
   useEffect(() => {
     fetchPost()
-  }, [id])
+  }, [postId])
 
   const fetchPost = () => {
     axios({
       method: 'GET',
-      url: `/api/posts/${id}`
+      url: `/api/posts/${postId}`
     })
       .then((response) => {
         setPost(response.data)
@@ -30,12 +33,30 @@ function PostPage() {
       })
   }
 
+  const fetchPostComments = () => {
+    axios({
+      method: 'GET',
+      url: `/api/posts/${postId}/comments`
+    })
+      .then((response) => {
+        setPost({...post, comments: response.data})
+      })
+      .catch((error) => {
+        console.log('fetchPostComments fail', error)
+      })
+  }
+
   return (
     <div className="dev-outline">
       <h2>Post Page:</h2>
       <Post post={post} />
 
       <h4>Comments:</h4>
+
+      { user.id && <CommentForm
+                      postId={postId}
+                      fetchPostComments={fetchPostComments} /> }
+
       <CommentsList comments={post.comments}/>
     </div>
   )
