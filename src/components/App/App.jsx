@@ -69,8 +69,12 @@ function App() {
             element={ <PostPage /> }
           />
           <Route
+            path="/bad_request"
+            element={<><h2>Bad Request:</h2><p>This is awkward, but you've made a bad request. Let's not read too much into this.<br/><br/>If you click/swipe back, the magical powers of the web browser you are using will take you back to where you were before this regrettable mishap occurred.</p></>}
+          />
+          <Route
             path="*"
-            element={<h1>Hmm. That's not a thing.</h1>}
+            element={<h2>Hmm. That's not a thing.</h2>}
           />
         </Routes>
       </BrowserRouter>
