@@ -95,6 +95,17 @@ Overview of how Context works in this app:
   * Edit button.
   * Delete button.
 
+## Refactoring TO-DOs:
+
+* Lots of duplication of this lil' friend in posts.router:
+
+```js
+if (isNaN(Number(req.params.id))) {
+  res.sendStatus(400)
+  return
+}
+```
+
 ## Future TO-DOs:
 
 * Likes. (Posts and comments.)
