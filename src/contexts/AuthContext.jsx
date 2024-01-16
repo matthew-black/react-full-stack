@@ -6,7 +6,7 @@ import axios from 'axios'
 const AuthContext = createContext()
 
 // This is a custom wrapper component. We're bundling up a piece of
-// state, and four auth-related functions, then feeding them
+// state and four auth-related functions, then feeding them
 // to  AuthContext.Provider as the value prop.
 // This nice little care package of auth goodies will be available
 // via the useAuthContext hook within any React component that is

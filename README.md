@@ -1,5 +1,53 @@
 # React Full-Stack w/ Less Abstraction
 
+## Eventually, This Will Be:
+
+**The first cool social media app that's good for the goddamn world.** Or more specifically, an Instagram/Strava kinda thing that financially benefits local bookstores, incentivizes healthy/carbon-neutral travel within your community, and encourages the beautiful act of selecting a book for a friend.
+
+Technically, it'll be an app where...
+
+#### Logged-in users can:
+
+* Create a profile.
+  * Stuff like: `{interests,fav_book,fav_bike,profile_pic_url}`
+* Friend and follow other users who've opted into a **non-default** social version of the app that is **only available after a user has created three valid posts**.
+* Create a post.
+  * A post is an instance of a user documenting, with *metadata/photos/text/mapped-routes*:
+    * Adventuring to a local, independent book store.
+      * Something cool, like [Birchbark Books](https://birchbarkbooks.com/).
+    * Buying a book at a local, independent book store.
+      * Something cool, like [The Shadow of Sirius](https://bookshop.org/p/books/the-shadow-of-sirius-w-s-merwin/8332953?ean=9781556592843).
+    * Optionally stopping at a local, independent cafe.
+      * Something cool, like [Prairie Sky Breads](https://www.prairieskybreads.com/).
+    * Adventuring from the local, independent book store to the gift book's destination.
+* Comment on posts.
+* Give *props* to posts.
+  * Categories of *props*:
+    * Cool book!
+    * Cool book store!
+    * Cool cafe!
+    * Cool mode of transportation!
+    * Cool route!
+* Share posts.
+
+#### Logged-out users can:
+
+* Browse a monthly, editorially curated selection of five awesome posts.
+
+#### Admin users can:
+
+* Have a convenient and enjoyable way to view metadata for posts, in order to curate public-facing content.
+
+#### Also:
+
+* The only profit motives are, **and can only ever** be:
+  * Nudging society toward carbon-neutral transportation methods being the norm.
+  * Financially benefitting local, small businesses.
+
+---
+
+## But, Here's Where We Are Now:
+
 <img src="./resources/myPostsPage.png" alt="the my posts page view" width=600px>
 
 This is an exploration of building a React/Express app using newer tools/libraries/APIs. Eventually it'll be a multi-user blog with posts, comments, and likes. Maybe there will be some flexbox, because flexbox is all I really know. 🙂
@@ -21,7 +69,9 @@ Things that are different from the post-Hooks Prime stack:
 6. `npm run client`.
 7. Enjoy using this highly complex web application!
 
-## Notes:
+## Notes Relevant to My Cool Job:
+
+AKA: [Prime](https://www.primeacademy.io/about)
 
 My ongoing/condensed notes on how this approach differs from our current stack/curriculum.
 
@@ -88,6 +138,8 @@ Overview of how Context works in this app:
 
 ---
 
+# The Rest of This is Just For Matt:
+
 ## TO-DOs:
 
 * Post and PostPreviewItem both need conditionally rendered:
@@ -109,5 +161,5 @@ if (isNaN(Number(req.params.id))) {
 
 ## Future TO-DOs:
 
-* I guess use some kind of component library to make this more closely resemble a typical student solo project? 🤷
-* Add some kind of API integration?
+* I guess use some kind of MUI-ish component library to make this more closely resemble a typical student solo project? 🤷
+* Add some kind of API integration with Google Maps, just to start figuring out what you'll need to know to build out the *Books, Bikes* stuff.
