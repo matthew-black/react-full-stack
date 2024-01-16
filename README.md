@@ -1,10 +1,18 @@
 # React Full-Stack w/ Less Abstraction
 
-## Eventually, This Will Be:
+## Eventually, This Will be `{app.title}`:
 
-**The first cool social media app that's good for the goddamn world.** Or more specifically, an Instagram/Strava kinda thing that financially benefits local bookstores, incentivizes healthy/carbon-neutral travel within your community, and encourages the beautiful act of selecting a book for a friend.
+```js
+let app = {
+  title: 'something about 🚴‍♀️📚🌎☕️ ?',
+  idea: 'Look 👇 for the 🦄',
+  missionStatement: `
+    The first cool social media app that's good for the goddamn world. Or more specifically, an Instagram/Strava kinda thing that financially benefits local businesses/bookstores, incentivizes healthy/carbon-neutral travel within your community, and encourages the beautiful act of selecting a book for a friend.
+  `
+}
+```
 
-Technically, it'll be an app where...
+## The Idea (🦄)
 
 #### Logged-in users can:
 
@@ -17,9 +25,9 @@ Technically, it'll be an app where...
       * Something cool, like [Birchbark Books](https://birchbarkbooks.com/).
     * Buying a book at a local, independent book store.
       * Something cool, like [The Shadow of Sirius](https://bookshop.org/p/books/the-shadow-of-sirius-w-s-merwin/8332953?ean=9781556592843).
-    * Optionally stopping at a local, independent cafe.
-      * Something cool, like [Prairie Sky Breads](https://www.prairieskybreads.com/).
     * Adventuring from the local, independent book store to the gift book's destination.
+    * *Optionally* stopping at a local, independent cafe.
+      * Something cool, like [Prairie Sky Breads](https://www.prairieskybreads.com/).
 * Comment on posts.
 * Give *props* to posts.
   * Categories of *props*:
