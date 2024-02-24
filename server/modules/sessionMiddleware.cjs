@@ -5,7 +5,6 @@ const MemoryStore = require('memorystore')(session)
 const sessionMiddleware = session({
   cookie: { 
     maxAge: 6 * 60 * 60 * 1000, // 6h
-    sameSite: true,
     httpOnly: true,
     secure: false // if true, cookie must be sent via HTTPS
   },
